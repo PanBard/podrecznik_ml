@@ -1,0 +1,1341 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>ML</title>
+      <script type="text/javascript" id="MathJax-script" async src="mathJax/tex-mml-chtml.js"></script>
+    <style>
+        .dottedline{ height: 3px; margin-top: 5px; margin-bottom: 5px; border-bottom: 0.5px dotted #444444;}
+        button{width: 100%; margin: 2%;}
+        img{height: 80%; width: 80%; }
+    </style>
+
+	<script>
+            function hide_all(){
+                let elements = document.getElementsByClassName('one__to_control_all');
+                for (let i = 0; i < elements.length; i++) {
+                    let xx = elements[i];
+                    xx.style.display = "none";
+                }
+            }
+            function show_content(element_id, title) {
+                hide_all(); // hide all div
+                document.getElementById('bigtitle').textContent = title;
+                let specific_element = document.getElementById(element_id);
+                specific_element.style.display = "block";
+            }			
+	</script>
+</head>
+
+<body style="background-color: #dedede;">
+	<div style="margin-left: auto; margin-right: auto; display: flex;">
+		<div style="width: 10%; padding: 8px; text-align: center; font-size: 18px;border-right: 2px dotted #666666;">
+<button  onclick="show_content('ogolne', 'Ogólne zagadnienia');change_title()" > Ogolne </button>
+<button  onclick="show_content('data_science', 'Data science')" > Data science </button>
+<button  onclick="show_content('ocena_jakosci_modeli', 'Ocena jakości modeli')" > Ocena jakości modeli </button>	
+<button  onclick="show_content('optymalizatory', 'Optymalizatory i funkcje aktywacji')" > Optymalizatory i funkcje aktywacji </button>	
+<button  onclick="show_content('regresja_liniowa', 'Regresja liniowa (linear regression)')" > Regresja liniowa </button>	
+<button  onclick="show_content('regresja_logistyczna', 'Regresja logistyczna')" > Regresja logistyczna </button>	     
+<button  onclick="show_content('klasteryzacja', 'Klasteryzacja')" > Klasteryzacja </button>	 
+<button  onclick="show_content('drzewa', 'Drzewa i lasy decyzyjne')" > Drzewa i lasy decyzyjne </button>
+<button  onclick="show_content('sieci_neuronowe', 'Sieci neuronowe')" > Sieci neuronowe </button>	 
+		</div>
+		<div id="content" style="float: left; padding: 40px; width: 100%; height: 100vh;  background-color: #dedede; text-align: justify;">
+			<span  id="bigtitle" style="font-size: 38px;font-weight: 900;">ML</span>
+			<div id="dottedline" style="height: 5px; margin-top: 15px; margin-bottom: 20px; border-bottom: 2px dotted #444444;"></div>
+			<span id="main_content" style="width: 100%; height: 100vh; " ></span>
+
+
+
+
+
+
+
+<div class="one__to_control_all" id="ogolne">
+	<h3>Rodzaje uczenia</h3>
+	<ul>
+        <li> <b>Uczenie nadzorowane</b> (z nauczycielem) – budowa modelu z wykorzystaniem etykietowanego zbioru uczącego, tj. zbiór danych składa się z dwóch wektorów (<x,y>) stanowiących informacje wejściowe (x) oraz odpowiadające im pożądane informacje wyjściowe (y).</li>
+        <li> <b>Uczenie nienadzorowane</b> (bez nauczyciela) – umożliwia budowę modelu opisującego ukrytestruktury i relacje w nieetykietowanym zbiorzeuczącym, tj. zbiór danych składa się wyłącznie z informacji wejściowych (x).</li>
+    </ul>
+
+    <h3>Główne zadania uczenia maszynowego</h3> 
+    <ul>
+        <li><b>Regresja</b> – przyporządkowanie obiektom wartości liczbowym</li>
+        <li><b>Klasyfikacja</b> – przyporządkowanie obiektów do klas (wyjście jest wartością dyskretną)</li>
+        <li><b>Klasteryzacja</b> – grupowanie obiektów o podobnych cechach</li>
+    </ul>
+
+ <h3>Podział modeli</h3>
+
+Modele można podzielić na:
+<ul>
+    <li><b>white box model</b> - Ich budowa wymaga wcześniejszej, pełnej wiedzy na temat modelowanego obiektu (procesu). Na podstawie tej wiedzy (prawa fizyki,chemii, …) układane są równania, które są rozwiązywane podczas symulacji.</li>
+    <li> <b>black box model</b> - Nie wymagają wiedzy na temat modelowanego obiektu (procesu). Są tworzone w oparciu o obserwacje (eksperymenty) modelowanego obiektu. Obserwacje składają się ze zbioru zawierającego relację pomiędzy wyjściem a wejściem.</li>
+    <li> <b>grey box model</b> - Są pewną kombinacją dwóch poprzednich grup. Ich budowa wymaga pewnej wiedzy teoretycznej, w oparciu o którą układane są odpowiednie równania opisujące modelowany obiekt, jak również obserwacje wykorzystywane do wyznaczenia współczynników występujący w równaniach.</li>
+    <li> <b>Metamodel</b> - Metamodel jest to pewna abstrakcja stworzona na bazie modelu (niższego poziomu) analizowanego rzeczywistego procesu  (obiektu) zbudowanego z wykorzystaniem wybranych metod modelowania matematycznego. Metamodelem może być każda aproksymacja modelu analizowanego procesu.</li>
+</ul>
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/metamodel.png" alt=""> 
+</div>
+
+
+
+<h2><b>Błąd uczący to nie zawsze to samo co funkcja kosztu !</b></h2>
+
+<h4>Z labów wiki:</h4>
+<b>przygotowanie danych:</b> <br>
+    - ładowaniem danych, <br>
+    - typami danych,<br>
+    - czyszczeniem danych,<br>
+    - rozkładami danych,<br>
+    - obsługą wartości brakujących,<br>
+    - zmiennymi kategorycznymi uporządkowanymi i nieuporządkowanymi,<br>
+    - skalowaniem wartości,<br>
+    - API biblioteki Scikit-Learn dla transformacji danych;<br>
+
+
+<h3>Biblioteki</h3>
+<ul>
+    <li> <a href="https://numpy.org/">numpy</a> - bibliotek do wykonywania obliczeń macierzowych. Pozwala na efektywne przeprowadzanie obliczeń naukowych. Dobrze współgra z biblioteką pandas.</li>
+    <li> <a href="https://pandas.pydata.org/">pandas</a> - narzędzie do analizy danych tabelarycznych, ich strukturyzowania oraz manipulacji na nich.</li>
+    <li> <a href="https://scikit-learn.org/stable/">sklearn</a> - narzędzie do tworzenia modeli klasyfikacji, regresji, clusteringu itp. Biblioteka ta jest dość rozbudowana i pozwala także na mapowanie danych czy redukcję</li>
+    <li> <a href="https://pypi.org/project/missingno/">missingno</a> - narzędzie do wizualizacji kompletności danych (brakujących wartości).</li>
+    <li><a href="https://seaborn.pydata.org/">seaborn</a> - kompleksowe narzędzie do wizualizacji danych jako takich. Pozwala na stworzenie bardzo szerokiej gamy wykresów w zależności od potrzeb.</li>
+</ul>
+
+<h3>Transformacja logarytmiczna zmiennej zależnej (którą chcemy przewidywać)</h3> 
+<br>- Zawsze warto też przyjrzeć się rozkładowi zmiennej docelowej, żeby poznać jej typ i skalę. 
+<br>- Rozkład normalny jest zwykle korzystniejszy dla tworzenia modeli, bo daje sensowną "wartość środkową" do przewidywania, a także penalizuje tak samo błędy niezależnie od ich znaku (zaniżona i zawyżona predykcja). Dokonamy dlatego <b>transformacji logarytmicznej (log transform)</b>, czyli zlogarytmujemy zmienną docelową (zależną). Dla stabilności numerycznej używa się zwykle <tt>np.log1p</tt>, a nie <tt>np.log</tt> (tutaj [wyjaśnienie](https://stackoverflow.com/questions/49538185/purpose-of-numpy-log1p)).
+<br>- Operowanie na tzw. log-price jest bardzo częste w finansach. Dodatkowa korzyść z takiej transformacji jest taka, że regresja liniowa przewiduje dowolne wartości rzeczywiste. Po przekształceniu logarytmicznym jest to całkowicie ok, natomiast w oryginalnej przestrzeni trzeba by wymusić przewidywanie tylko wartości pozytywnych (negatywne ceny są bez sensu). Da się to zrobić, ale zwiększa to koszt obliczeniowy. 
+<br>- np <b>Przykład:</b> - <tt>df['SalePrice'] = np.log1p(df['SalePrice'])</tt> - jeśli cena domów jest naszązmienną zależną  
+
+<h3>Dane kategoryczne</h3>
+Istnieją dwa główne rodzaje danych: 
+<br> <b>numeryczne</b> (<i>numerical data</i>) Dane numeryczne to żadna niespodzianka, po prostu mają swoją wartość
+<br> <b>kategoryczne</b> (<i>categorical data</i>) Dane kategoryczne to takie, którym w większości przypadków nie można przyporządkować wartości liczbowej (wyjątkiem są: )
+<br>    - <b>kategoryczne uporządkowane</b> - <i>categorical ordinal</i>
+<br>    - <b>kategoryczne nieuporządkowane</b> - <i>categorical nominal</i> , np. zmienną reprezentującą kolory o wartościach "red", "green" i "blue. Jeżeli zakodowałbyś je np. jako $red = 0$, $green = 1$, $blue = 2$, to stwierdzasz tym samym, że w pewnym sensie $red < green < blue$. Raczej nie ma powodu, żeby tak sądzić. Jest to zmienna, która ma skończoną liczbę wartości, ale są one nieuporządkowane.
+<br>    - <b>binarne</b> (<i>boolean</i>) - Przyjmuje ona dokładnie dwie wartości kategoryczne: <i>No</i> oraz <i>Yes</i>. W takiej sytuacji wolno zakodować te wartości numerycznie jako 0 i 1. Stwierdzasz tym samym, że coś albo jest, albo nie ma.
+
+<h3>Przygotowanie danych do uczenia</h3> 
+Zbiór danych dzielimy na 2 zbiory:
+<br>- <b>treningowy</b> (70% - 80%) uczenie modelu 
+<br>- <b>testowy</b> (30% - 20%) szacowanie jakości - Wyniki uzyskiwane przez model na danych treningowych nie odzwierciedlają tego, jak będzie on sobie radził na danych, których nie ma w zbiorze uczącym. Aby uzyskać taką informację, konieczne jest sprawdzenie, jak model radzi sobie na danych testowych. Daje nam to oszacowanie, jak dobrze model *generalizuje się* dla nowych danych.
+
+<br>Funkcja <tt>train_test_split</tt> z biblioteki Scikit-Learn przyjmuje osobno macierze dla cech (*features*) i etykiet (*labels*), dlatego wyodrębniamy sobie z naszej tablicy kolumnę </b>SalePrice</b>, która zawiera ceny nieruchomości.
+<tt>
+y = df.pop("SalePrice")
+X_train, X_test, y_train, y_test = train_test_split( df, y, test_size=0.3, random_state=0 )
+</tt>
+
+<br>Warto wydzielić zbiory kolumn z danymi numerycznymi i kategorycznymi, co później ułatwi nam odwoływanie się do nich:
+<tt>
+    categorical_features = df.select_dtypes(include="object").columns
+    numerical_features = df.select_dtypes(exclude="object").columns
+</tt>
+
+<h3>Nootacja macierzowa</h3>
+ <b>wektor</b> w matematyce często oznaczamy małą pogrubioną literą <b>x</b> - w programowaniu natomiast oznaczamy po prostu małą literą - <tt>x</tt>
+<br> <b>macierz</b> w matematyce oznaczamy dużą pogrubioną literą <b>X</b> - w programowaniu po prostu dużą literą - <tt>X</tt>
+<br>- Zbiór etykiet to w naszym przypadku *wektor* cen, więc zapisujemy <tt>y</tt> małą literą. Z drugiej strony <tt>X</tt> zawiera kolumny z cechami opisującymi poszczególne rekordy, a więc jest to *macierz*.
+
+<br><b>Uwaga</b>: w eksperymentach ustalamy na sztywno wartość parametru <tt>random_state</tt>. [Doczytaj](https://scikit-learn.org/stable/glossary.html#term-random_state), warto wstawiać 0 lub 42, wtedy zawsze mamy tak samo randomowo podzielony zbiór, co przydaje się do porównywania modeli, bez tych liczb w random_state, zwsze byśmy dostawali inne próbki w zbiorach
+
+
+<h3>Transformacja danych</h3>
+- <b>one-hot encoding</b> - zmienne kategoryczne nieuporządkowane trzeba przetworzyć tak, aby nasz algorym był w stanie je obsłużyć, czyli je zakodować. Przykładowo, jeżeli mielibyśmy 3 wartości <tt>["A", "B", "C"]</tt>, to powstają z nich 3 cechy (kolumny macierzy <tt>X</tt>) <tt>[col_A, col_B, col_C]</tt>. Wiersz z pierwotną wartością <tt>"B"</tt> będzie miał wartości tych cech <tt>[0, 1, 0]</tt>.
+    - <b>kardynalnoś zmiennych (cardinality)</b> - czyli zmienna ma dużo możliwych wartości, więc kolumn w kodowaniu powstanie bardzo dużo. Są to zmienne </b>rzadkie (sparse)</b>, więc tracimy dużo pamięci na przechowywanie zer. Istnieją inne kodowania, które zajmują mniej miejsca, a implementuje je biblioteka [Category Encoders](https://contrib.scikit-learn.org/category_encoders/).
+<br>- <b>imputacja (impute)</b> - uzupełnianie zmiennych numerycznych gdy mają wartości brakujące, mamy takie możliwości:
+<br>    <ul>
+<li>1 Usunąć kolumnę, która zawiera brakujące wartości.</li>
+<li>2 Usunąć wiersze, w których brakuje wartości.</li>
+<li>3 Zastąpić brakujące wartości innymi, np. średnią z kolumny, medianą albo wartością stałą.</li>
+<li>4 Przewidzieć brakujące wartości wykorzystując odpowiedni model uczenia maszynowego.</li>
+</ul> 
+ Podejście 4 jest często zbyt czasochłonne. Opcje 1 i 2 prowadzą do utraty danych.  Nie znaczy to jednak, że usunięcie wierszy czy kolumny jest zawsze złym podejściem. Usunięcie kolumny jest uzasadnione, jeśli ma ona naprawdę dużo wartości brakujących. W takich wypadkach ciężko z niej wyciągnąć jakąkolwiek sensowną informację. Usunięcie wierszy może być uzasadnione w przypadku, gdy mamy dużo rekordów i tylko niewielka część z nich posiada wartości brakujące (usunięcie kilku wierszy nie powinno powodować problemu).
+<br>    - Pamiętaj, że imputacji dokonuje się dopiero po podziale na zbiór treningowy i testowy! W przeciwnym wypadku wykorzystywalibyśmy dane ze zbioru testowego, co sztucznie zawyżyłoby wyniki.
+<h4>skalowanie danych</h4>
+    - <b>normalizacja (normalization)</b> zmienne numeryczne skalujemy do zakresu wartości $[0, 1]$ przez zastosowanie </b>min-max scaling</b>.
+<br>    - <b>standaryzacja</b> Polega na odjęciu średniej i podzieleniu przez odchylenie standardowe każdej cechy. Wynikiem przekształcenia są cechy o średniej 0 i odchyleniu standardowym 1.
+<br>        -  <i>RobustScaler</i>, który jest podobny do <i>StandardScaler</i>, ale używa mediany i kwartyli zamiast średniej i odchylenia standardowego. Są to tzw. robust statistics, czyli miary odporne na występowanie wartości odstających (outliers).
+<br>     - Porównanie różnych metod skalowania <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html"> możesz znaleźć tutaj</a>.
+<br>     - Więcej informacji na temat tego, dlaczego skalowanie jest tak istotne, możesz znaleźć <a href="https://analyticsindiamag.com/why-data-scaling-is-important-in-machine-learning-how-to-effectively-do-it/">tutaj</a>.
+
+
+ <h4>Standaryzacja - metody <tt>.fit()</tt> i <tt>.transform()</tt> (tylko dla numerycznch)</h4>
+
+Do wykonania standaryzacji potrzebujemy dla każdej z cech określić 2 wartości - średnią oraz odchylenie standardowe. Formuła standaryzacji dla przypomnienia:
+
+$$z = \frac{x - \mu}{\sigma}$$
+
+Metodę <tt>.fit()</tt> wykonujemy tylko raz, dla <b>danych treningowych</b>. To powoduje, że obliczamy wartości <span style="display: inline-block;"> $$\mu$$ </span>  oraz <span style="display: inline-block;"> $$\sigma$$ </span>   dla każdej cechy, na podstawie wartości ze zbioru treningowego.
+<br> Wyuczone wartości zostają zapisane w obiekcie <tt>StandardScaler</tt> i mogą być później używane do przeprowadzenia standaryzacji zarówno dla danych treningowych, jak i testowych.
+<br><br>Metoda <tt>.transform()</tt> przekształca dane za pomocą parametrów wyznaczonych w <tt>.fit()</tt>. Wykonujemy ją dla <b>danych testowych</b>.
+
+<br>Jest też metoda <tt>.fit_transform()</tt> która najpierw wykonuje <tt>.fit()</tt>, a potem <tt>.transform()</tt> i zwraca wynik ostatniej. W przypadku niektórych transformacji wykorzystuje ich specyfikę i działa szybciej, niż sekwencyjne wywołanie <tt>.fit()</tt> oraz<tt>.transform()</tt>. Trzeba jednak pamiętać, że możemy tego użyć tylko na zbiorze treningowym - na zbiorze testowym wywołujemy już tylko <tt>.transform()</tt>.
+
+<br><br><b>Nie przeprowadzamy osobnej standaryzacji dla zbioru treningowego i testowego</b>
+
+ <br>Osobno przeprowadzając standaryzację dla danych testowych, zaburzylibyśmy rozkład tej cechy. Modele są niezwykle czułe na podobne zaburzenia - musimy przetwarzać dane spójnie. 
+
+<br><br><b>Czemu nie wywołać <tt>.fit()</tt> na wszystkich danych, a nie tylko treningowych?</b>
+<br>Wydzieliliśmy dane testowe po to, żeby sprawdzać, jak model poradzi sobie z danymi, których do tej pory nigdy nie widział, bo to właśnie takie dane będzie on dostawać w praktyce, po wdrożeniu do realnego systemu. Ta ocena obejmuje też etap preprocessingu, w tym skalowania. Więc jeśli etap preprocessingu zobaczy dane testowe, to nie będziemy w stanie uczciwie estymować jego zachowania na nowych danych.
+
+
+<h3></b>Wyciek danych (data leakage)</b>  </h3>
+To błąd metodologiczny.
+Wykorzystanie danych testowych w procesie treningu. Skutkuje on niepoprawnym, nadmiernie optymistycznym oszacowaniem jakości modelu.
+
+
+<h3></b>Klasyfikacja niezbalansowaną (imbalanced classification)</b> </h3>
+np.gdy klasa pozytywna jest w znacznej mniejszości, stanowi poniżej 5% zbioru.  Mamy wtedy:
+<br>- </b>klasę dominującą (majority class)</b> 
+<br>- </b>klasę mniejszościową (minority class)</b>. 
+<br>- Pechowo prawie zawsze interesuje nas ta druga, bo klasa większościowa nie niesie najczęściej żadnych interesujących informacji. Przykładowo, 99% badanych jest zdrowych, a 1% ma niewykryty nowotwór - z oczywistych przyczyn chcemy wykrywać właśnie sytuację rzadką (problem diagnozy jako klasyfikacji jest zasadniczo zawsze niezbalansowany). W dalszej części laboratorium poznamy szereg konsekwencji tego zjawiska i metody na radzenie sobie z nim.
+
+<h3></b>Próbkowanie ze stratyfikacją (stratified sampling)</b></h3>
+<br>- próbkowanie ze stratyfikacją - dzięki temu proporcje klas w zbiorze przed podziałem oraz obu zbiorach po podziale są takie same.
+<br>- Podział na zbiór treningowy i testowy to pierwszy moment, kiedy niezbalansowanie danych nam przeszkadza. Jeżeli zrobimy to czysto losowo, to jest spora szansa, że w zbiorze testowym będzie tylko klasa negatywna - w końcu jest jej aż >95%. Dlatego wykorzystuje się próbkowanie ze stratyfikacją
+</div>
+
+<div class="one__to_control_all" id="data_science">
+<h3> Dwa typy analiz</h3>
+
+ - <b>analiza deskrypcyjna</b> szukanie wzorców ukrytych w danych
+ <br>- <b>analiza predykcyjna</b> tworzenie modelu danych do uzupełnienia brakujących danych
+
+ <div class="dottedline"></div>
+<h3>Zasada GIGO</h3>
+Garbage In, Garbage Out - przetwarzanie błędnych danych daje błędne wyniki, niezależnie od poprawnej procedury ich przetwarzania
+
+ <div class="dottedline"></div>
+<h3>Typy danych</h3>
+- <b>jednowymiarowe</b> - ciąg wartości, wektor
+<br>- <b>dwuwymiarowe</b> - 2 wektory wartości - macierz
+
+ <div class="dottedline"></div>
+<h3>Skale</h3>
+- Pomiarowa – np. długość, gdy mierzymy w mm to możemy zyskać bardziej dokładne dane niż pomiar w cm czy m
+<br>- Przedziałowa – np. temperatura, Celsjusz i Fahrenheit, ta sama temp. ma różne wartości, więc nie można jej porównać
+
+<div class="dottedline"></div>
+<h3><b>Zmienne</b> – to atrybuty obiektów, które dzielą się na:</h3> 
+<b>Jakościowe/kategoryczne</b> – ich zbiór zawsze jest ograniczony (np. liczba miesięcy - 12) dlatego wartości zmiennych kategorycznych nazywane są stanami, określenie odległości między wartościami jest możliwe jedynie w ramach przyjętego modelu (np. odległość kolorów w przyjętej palecie barw), niemożliwe jest na nich wykonanie operacji arytmetycznych
+    <ul>
+    <li>Zmienna porządkowa – gdy wartości można ze sobą porównać np. poziom wykształcenia</li>
+    <li>Regularna zmienna kategoryczna – nie możemy jej sensownie porównywać np. płeć </li>
+    </ul> 
+
+<br> <b>Ilościowe/numeryczne</b> – mogą być nimi wyłącznie liczby, wartości można ze sobą porównać, możliwe jest określenie odległości pomiędzy wartościami, możliwe jest wykonywanie na nich operacji arytmetycznych
+<ul>
+    <li>Ciągłe – zbiór wartości jest nieprzeliczalny, czyli jest nieskończony np. długość</li>
+    <li>Dyskretne – zbiór wartości jest przeliczalny, czyli liczba wartości choć duża jest skończona np. wiek w dniach</li>
+</ul>
+
+<br> <b>Zmienne nieprzydatne:</b>
+           <ul>
+            <li>Stałe – wartości nie zmieniają się </li>
+            <li>Wartości zawsze niepowtarzalne – np. pesel czy id wierszy</li>
+            <li>Zmienne monotoniczne – stale się zmniejszają się lub zwiększają np. logi daty pomiaru, lub numer faktury</li>
+           </ul> 
+
+
+
+
+ 
+
+<h3> Statystyki opisowe oraz metody graficzne – w taki sposób opisuje się rozkład wartości zmiennych numerycznych</h3>
+<h3> Miary tendencji centralnej:</h3>
+- Dominanta – 
+- Mediana (drugi kwartyl)– 
+- Kwartyle (rozstęp ćwiartkowy) – 
+- Średnia arytmetyczna – 
+<h3> Miary symetrii rozkładu wartości zmiennych:</h3>
+- badanie skośności - rozkład normalny (symetryczny), lewoskośny, prawoskośny 
+- Kurtoza (kurtosis) – miara symetrii rozkładu która mierzy poziom zagęszczenia wokół wartości centralnej, przyjmuje 0 dla rozkładu normalnego, wartości ujemne dla rozkładu spłaszczonego, czyli wartości zmiennej są zróżnicowane, kurtoza większa od zera dla rozkładu bardziej smukłego i wyższego od normalnego, czyli zmienna przyjmuje częściej wartości zbliżone do średniej 
+<h3> Miary rozproszenia: </h3>
+- Rozstęp
+- Wariancja
+- Odchylenie standardowe
+- Współczynnik zmienności
+<h3> Rozkład zmiennych kategorycznych ocenia się za pomocą tabel częstości (histogramów – częstość występowania danej klasy/stanu)</h3>
+<h3> Korelacja (związek pomiędzy zmiennymi) – 2 zmienne są ze sobą skorelowane, jeśli wartość jednej z nich pozwoli obliczyć wartość </h3>drugiej, dzięki temu można wyeliminować zmienne które nie mają wpływu na wyniki modelowania
+<h3> Sprawdzanie korelacji poprzez wyświetlanie ich na wykresie</h3>
+- Wykres punktowy – jeśli obie zmienne są numeryczne
+- Wykres pudełkowy – jeśli jedna zmienna jest kategoryczna a druga numeryczna
+- Macierz – jeśli obie zmienne są kategoryczne
+<h3>	Współczynniki korelacji:</h3>
+- R-Pearsona – dla zmiennych numerycznych
+- C-Pearsona, phi Yule’a, V-Cramera – dla zmiennych dyskretnych
+- Spearmana – dla zmiennych porządkowych
+- Q-Kendalla – dla zmiennych o rozkładzie multimodalnym
+- Współczynnik mniejszy od 0.3 -> nieistotne, 0.3-0.6 –> średnio istotne, powyżej 0.6 -> silnie skorelowane
+<h3> Upraszczanie modelu – </h3>
+- prostszy model to taki który wymaga mniejszej liczby parametrów, czyli opiera się na mniejszej liczbie zmiennych. Jeśli 2 modele mają taką samą skuteczność, to lepszy będzie prostszy. Dlatego powinno się usuwać zmienne które nie są w relacji z innymi lub są zbyt skorelowane czyli nadmiarowe, bo tylko komplikują model i wydłużają czas uczenia. 
+<h3> Zmienna anachroniczna </h3>
+- zmienna, której wartość nie mogła być znana w czasie przeprowadzania obserwacji, dlatego nie może być w zbiorze danych uczących, bo przy predykcji nie będziemy dysponowali taką zmienną {SZELIGA s50}
+<h3> Reprezentatywność danych:</h3>
+- Obciążenie próby – wybrane przypadki do tej próby z całej populacji nie są reprezentatywne, czyli zawierają jakieś specyficzne cechy dla danych warunków {SZELIGA s51}
+- Błąd systematyczny (bias) – skutkuje zawyżeniem lub zaniżeniem wszystkich pomiarów {SZELIGA s51}
+- Błąd przypadkowy (noise) – przypadkowa zmiana pomiarów {SZELIGA s51}
+<h3> Szeregi czasowe </h3>
+- dane zawierające wartości, które są uporządkowane według klucza (indeksu) który reprezentuje czas. Szereg czasowy składa się z dwóch zmiennych – monotonicznego klucza (czas) oraz wartości zmierzonych.  {SZELIGA s56}
+<h3> Wstępne przetwarzanie danych (przygotowanie danych) </h3>
+- Usuwanie wartości odstających (nietypowych) {SZELIGA s73}
+- Uzupełnienie brakujących danych – zastąpienie stałą, średnią, medianą, dominantą lub usunięcie całych wierszy lub kolumn
+- Normalizacja – normalizacja polega na zastąpieniu (przeskalowaniu) oryginalnych danych wartościami mieszczącymi się w specyficznym, niewielkim zakresie (np. od -1 do 1). Dzięki temu ułatwione jest modelowanie danych skośnych, takich których większość wartości znajduje się na jednym końcu ich zakresu. {SZELIGA s76} Poniżej 5 metod normalizacji:
+- Metoda min-max (transformacja linowa) – zamiana minimalnej i maksymalnej wartości atrybutu na wybrany przedział np. od 0 do 1. Następuje to przez przeskalowanie liniowe. Zachowuje ona oryginalny rozkład wartości, przez co nie nadaje się do ograniczenia wpływu wartości odstających. {SZELIGA s76}
+- Metoda z-score (standaryzacja)- zamiana rozkładu danych, by otrzymać rozkład o średniej w 0 i odchyleniu standardowym równym 1. Po standaryzacji wartości mniejsze od średniej będą miały wartości ujemne, a wartość większe od średniej będą miały wartości dodatnie. Też nie zmienia rozkładu danych. Stosowana, gdy nie znamy wartości min i max. {SZELIGA s76}
+- Skalowanie funkcją eksponencjalną – polega na nieliniowej zmianie oryginalnych danych. Czyli wartości bliskie średniej zostaną przeskalowane prawie liniowo, a wartości odstające będą blisko -1 i 1. {SZELIGA s76}
+- Doprowadzanie do rozkładu logarytmiczno-normalnego – skalujemy dane wtedy gdy ważniejsza jest zmiana danych o dany % niż o konkretną wartość. {SZELIGA s77}
+- Skalowanie hiperboliczne – zmiana danych w przestrzeni hiperbolicznej przez co zmniejsza się wpływ wartości bliższych średniej. {SZELIGA s77}
+<h3> Dyskretyzacja </h3>
+- zamiana zmiennych numerycznych na kategoryczne przez przyporządkowanie etykiet poszczególnym przedziałom. {SZELIGA s77}
+<h3> Numerowanie stanów - odwrotnie niż w dyskretyzacji, czyli przekształcenie zmiennej kategorycznej na numeryczną </h3>
+- Kodowanie jeden do wielu 
+    - zastąpienie jednego atrybutu dyskretnego wieloma atrybutami binarnymi np. jeden atrybut o nazwie kolor może mieć 5 różnych stanów czyli 5 różnych kolorów, więc tworzymy pięć nowych zmiennych o nazwach tych kolorów, a wartość zmiennych to 1 gdy taki kolor występuje lub 0 gdy nie {SZELIGA 81}
+    - Kodowanie wiele do wielu
+<h3> Wygładzanie </h3> - polega na lokalnym uśrednianiu danych np. poprzez średnią ruchomą, czyli zastąpienie każdego elementu szeregu przez zwykłą lub ważoną średnią n sąsiadujących wartości, gdzie n jest szerokością okna wygładzenia {SZELIGA 84}
+<h3> Szeregi stacjonarne</h3> – to szeregi czasowe które mają stałe w czasie 3 atrybuty: średnią, wariancję i autokorelację
+<h3>	Sezonowości </h3> – druga po trendzie składowa szeregów czasowych czyli coś pojawia sią co jakiś czas, której miarą jest autokorelacja
+- Różnicowanie szeregu – w celu wykrycia ukrytej sezonowości, uwypuklanie harmoniki (składników okresowych) {SZELIGA 88}
+<h3> p-wartość</h3> – graniczny poziom istotności {SZELIGA 89}
+<h3> Tokenizacja </h3> – podzielenie dokumentu na podstawowe jednostki informacji, czyli termy, najczęściej są to słowa {SZELIGA 90}
+<h3> Klątwa wymiarowości </h3>
+- w miarę wzrostu liczby wymiarów (czyli wzrostu liczby zmiennych określających obiekt/pomiar) liczba obiektów (pomiarów, po prostu konkretnych próbek) potrzebnych do wiarygodnego oszacowania parametrów lub funkcji rośnie wykładniczo. Np. gdy jakieś punkty są zgrupowane blisko siebie w 2 wymiarach, to po dodaniu 3 wymiaru może się okazać, że są one znacznie oddalone od siebie. W miarę dodawania kolejnych wymiarów ta sama ilość punktów może się oddzielać od siebie jeszcze bardziej i to w innych kierunkach stając się niemalże randomowymi punktami w przestrzeni. W tej sytuacji nie jesteśmy w stanie wykryć zależności między nimi, dlatego potrzebne jest znacznie większa ilość nowych próbek by zależności mogły stać się widoczne. {SZELIGA 94}
+- Zbyt duża liczba parametrów może spowodować przeuczenie, czyli nadmierne dopasowanie modelu. 
+- Redukcja wymiarów – ograniczenie zmiennych wejściowych. Do usunięcia należy rozważać zmienne najsłabiej skorelowane ze zmienną wyjściową, oraz najsilniej skorelowane z inną zmienną wejściową.
+- Zdolności predykcyjne sprawdza się za pomocą:
+    - Współczynnika korelacji linowej Pearsona
+    - Test Pearsona – test chi kwadrat
+    - Współczynnika korelacji rang Spearmana 
+    - Test wariancji Fishera
+    - Współczynnik korelacji rang Kendalla
+
+<h3> ANOVA </h3>– test dwustronny {BRUCE s121}
+<h3> Współczynnik korelacji liniowej – Pearsona – </h3> mierzy jedynie zależność liniową pomiędzy 2 cechami, wartości współczynnika zawierają się pomiędzy (-1, 1), gdzie 1 to silna korelacja dodatnia (y rośnie ze wzrostem x), -1 to silna korelacja ujemna (y maleje ze wzrostem x),  {NERON s84} Macierz korelacji macierz z wartościami współczynnika dla każdej cechy Pokazany wzór w {BRUCE s44}
+z
+ 
+<h3> Uczenie nadzorowane:</h3>
+<h3> Klasyfikacja (ang. classification) </h3>
+jest klasycznym zadaniem uczenia nadzorowanego, stosowana do przewidywania klasy.
+<h3> Regresja</h3>
+ ma za zadanie przewidzieć docelową wartość numeryczną.
+<h3> Algorytm regresji logistycznej</h3>
+ jest stosowany i tu i tu, bo może dawać prawdopodobieństwo przynależności do danej klasy w procentach. {GERON s34-35}
+<h3> Uczenie modelu </h3>
+oznacza wyznaczenie parametrów w taki sposób że będą optymalnie dopasowane do zbioru uczącego. {GERON s147}
+<h3> Hiper parametry regularyzacyjne </h3>
+– zależą od stosowanego algorytmu, umożliwiają przeprowadzanie regularyzacji modelu. {GERON s209}
+<h3> Uogólnianie modelu </h3>
+- błąd generalizacji modelu wyrażamy w postaci sumy trzech odmiennych rodzajów błędów (trzech składowych błędu uogólniania):
+<h3> Obciążenie (bias) </h3>
+- wynika z nieprawidłowych założeń, np. założenia że dane są liniowe gdy są opisane funkcją kwadratową – im większe obciążenie tym model jest niedotrenowany do danych uczących
+<h3> Wariancja (variance) </h3>
+– nadmierna czułość modelu na drobne wahania w wartościach danych uczących – im większa wariancja tym model jest przetrenowany wobec danych uczących.
+<h3> Błąd nieredukowalny (irreducible error) </h3>
+– konsekwencja zaszumienia danych, czyli występowanie błędów grubych. Aby go zmniejszyć trzeba oczyścić dane, czyli usuwanie elementów odstających. 
+<h3> Mówimy tu o kompromisie </h3>
+– proste modele mają większe obciążenie a małą wariancję, złożone modele mają większą wariancję a małe obciążenie{GERON s167}
+<h3> Regularyzacja </h3>
+– do zmniejszania stopnia przetrenowania modelu. Ograniczenie modelu w celu jego uproszczenia i zmniejszenia ryzyka przetrenowania głównie przez ograniczanie parametrów modelu. Np. model liniowy ma 2 parametry a i b czyli ma 2 stopnie swobody, możemy ograniczyć zmianę jednego z nich. {GERON s54}
+<h3> Wczesne zatrzymywanie (early stopping)</h3>
+– regularyzacja iteracyjnych algorytmów uczących np. metoda gradientu prostego. Polega na zakończeniu uczenia gdy błąd walidacyjny jest minimalny. {GERON s173}
+<h3> Modele parametryczne </h3>
+– np. model linowy, występuje ustalona liczba parametrów już przed procesem trenowania, dlatego można kontrolować proces przetrenowania i niedotrenowania. Modele nieparametryczne – mają parametry, ale liczba tych parametrów nie jest ustalana przed rozpoczęciem trenowania, dlatego model łatwo dostosowuje się do danych i przetrenowanie jest duże, np. drzewa decyzyjne. {GERON s209} 
+<h3> Modele białej skrzynki </h3>
+– są intuicyjne i można je łatwo interpretować- np. drzewa decyzyjne. Modele czarnej skrzynki – trudno wytłumaczyć skąd wzięły się predykcje, np. losowe lasy i sztuczne sieci neuronowe {GERON s206}
+<h3> Wypaczone zbiory danych (skewed datasets) </h3>
+– zbiory danych w których niektóre klasy występują znacznie częściej od pozostałych 
+<h3> Predykcja </h3>
+– to obliczanie wartości zmiennej wyjściowej dla wartości zmiennych wejściowych mieszczących się w zakresie wartości danych treningowych {SZELIGA s176}
+<h3> Ekstrapolacja </h3>
+– to obliczanie wartości zmiennej wyjściowej dla wartości zmiennych wejściowych nie mieszczących się w zakresie wartości danych treningowych, czyli większe lub mniejsze niż zbiór treningowy {SZELIGA s176}
+</div>
+
+<div class="one__to_control_all" id="ocena_jakosci_modeli">
+<h3> Ocena modeli klasyfikacji</h3>
+
+Modele: 
+<ul>
+    <li>typowo binarne klasyfikatory: SGDClassifier i SVC</li>
+    <li>wieloklasowe modele: LogisticRegression, RandomForestClassifier, GaussianNB</li>
+</ul>
+
+<h4> Strategie klasyfikacji wieloklasowej</h4>
+<ul>
+    <li>
+         - OvA (one versus all) or OvR (one versus rest) - <b>jeden przeciw reszcie</b> - dla 10 klas, tworzymy 10 klasyfikatorów binarnych po jednym dla każdej klasy - wybieramy klasę która uzyskała najwyższy wynik
+    - klasyfikatorów jest tyle co klas, ale musimy trenować na całym zbiorze danych
+    - stosowany w większości klasyfikatorów
+    </li>
+
+    <li> - OvO (one versus one) - <b>jeden przeciw jednemu</b> - utworzenie klasyfikatorów binarnych dla każdej pary klas, czyli dla 10 klas będzie to 45 klasyfikatorów, wybieramy wted klasę która wygra większość pojedynków
+    - każdy klasyfikator jest trenowany jedynie wobec części zbioru uczącego - więc szybciej 
+    - stosowany w maszynach wektorów nośnych</li>
+</ul>
+
+
+
+
+<h4> Rodzaje klasyfikiacji</h4>
+<ul>
+    <li><b>binarna</b> - do rozpoznawania 2 klas np. 0 i 1</li>
+    <li><b>wieloklasowa</b> <i>(multiclass classification)</i> - jeden model jest w stanie rozróżnić więcej niż 2 klasy, ale wynikiem jest jedna znaleziona klasa - postać wyjścia: [0.1, 0.24, 0.12, 0.98]</li>
+    <li><b>wieloeykietowa</b> <i>(multilabel classification)</i> - jeden model może wyznaczać kilka klas dla jednej próbki, np rozpoznawanie wiele twarzy na zdjęciu - postać wyjścia: [True, False, True]</li>
+    <li><b>wielowyjściowa</b> <i>(multioutput-multiclass classification)</i> - rozszerzenie klasyfikacji wieloetykietowej, czyli dla jednej próbki wyznacza się wiele etykiet z czego każda etykieta może być wieloklasowa czyli mieć więcej niż 2 możliwe wartości, np. chcemy prognozować poziom szarości dla każdego piksela w obrazie, więc dla kązdego piksela będzie wyznaczana etykieta <i>(klas. wieloeykietowa)</i> która z kolei może przyjmować wiele różnych wartości/należeć do wielu różnych klas <i>(klas. wieloklasowa)</i> z 255 wartości</li>
+</ul>
+
+
+<h4> Współczynnik wsparcia (support)</h4>
+wyznaczamy wagi dla klas stosownie do liczby ich próbek w datasecie, gdy klasy mają nierówną ilość danych uczących
+
+
+
+<h3> Metryki klasyfikacji binarnej</h3>
+W klasyfikacji binarnej mamy tylko dwie klasy, z konwencji oznaczamy jedną klasę jako negatywną, a drugą - pozytywną. W naszym przypadku klasą negatywną będą osoby niezainteresowane lokatą - nie chcemy im pokazywać naszych reklam, bo to będzie raczej nieskuteczne, a reklama kosztuje. Naszym targetem będą osoby oznaczone klasą pozytywną.
+
+Wytrenowaliśmy model, ale jak sprawdzić jakość jego działania? Metryki z regresji raczej za wiele nam nie pomogą. Potrzebujemy zdefiniować nowe.
+
+<h4> Celność, dokładność (<i>Accuracy</i>)</h4>
+
+Najprostszym sposobem oceny klasyfikacji jest sprawdzić, w ilu przypadkach się mylimy, a w ilu model odpowiada poprawnie. Ta metryka jest zwana <b>accuracy</b>. Ma ona jednak zasadniczą wadę - kompletnie nie radzi sobie z klasami niezbalansowanymi.
+
+Prosty przypadek - mamy zbiór danych, który pozwala na podstawie różnych parametrów medycznych wykryć rzadką chorobę, która zdarza się u 0.01% ludzi. Weźmy prosty klasyfikator, który zawsze zwraca klasę negatywną. Niby jest w oczywisty sposób kompletnie nieprzydatny, ale jednak dla losowej próbki ludzi dostanie <b>celność</b> równą 99.99%, bo, rzeczywiście, u większości tej choroby nie będzie.
+
+Potrzebujemy bardziej skomplikowanej metryki, której nie da się tak łatwo oszukać.
+
+
+<h4> Macierz pomyłek (<i>Confusion Matrix</i>)</h4>
+
+Żeby zdefiniować taką metodę oceny klasyfikacji, musimy najpierw rozważyć jakie sytuacje mogą zdarzyć się przy klasyfikacji binarnej. Spójrzmy na tablicę poniżej:
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/confusion-matrix.png" alt=""> 
+</div>
+
+Występują tutaj przypadki:
+<b>prawdziwie pozytywne</b> (<i>true positive</i>) - model zwrócił klasę pozytywną (<i>positive</i>), i jest to prawda (<i>true</i>)
+ <b>prawdziwie negatwyne</b> (<i>true negative</i>) - model zwrócił klasę negatywną (<i>negative</i>), i jest to prawda (<i>true</i>)
+ <b>fałszywie negatywne</b> (<i>false negative</i>) - model zwrócił klasę negatywną (<i>negative</i>), ale nie jest to prawda (<i>false</i>)
+ <b>fałszywie pozytywne</b> (<i>false positive</i>) - model zwrócił klasę pozytywną (<i>positive</i>), ale nie jest to prawda (<i>false</i>)
+
+Mając powyższe punkty - możemy zdefiniować <b>celność</b> następująco:
+
+$$accuracy = \frac{TP + TN}{TP + TN + FP + FN}$$
+
+czyli ilość przypadków, w których poprawnie zidentykowaliśmy klasę, podzieloną przez ilość wszystkich przypadków.
+
+
+
+
+<h4> Precyzja (miara predykcyjna dodatnia) i czułość (<i>Precision & Recall</i>)</h4>
+
+Jednak jak zauważyliśmy wcześniej, istnieją sytuacje, w których nie jest to właściwe podejście.
+
+Zdecydowanie ciekawszą dla nas metryką może być stwierdzenie jaką część rekordów z klasą pozytywną model poprawnie rozpoznał. Pozwoli to nam powiedzieć, jak czuły jest nasz model na klasę pozytywną. Ta metryka nazywa się czułością (<b>recall</b>):
+
+$$recall = \frac{TP}{TP + FN}$$
+
+Jest o ilość przypadków, w których poprawnie rozpoznaliśmy klasę pozytywną, podzielona przez ilość wszystkich przypadków z klasą pozytywną.
+
+Drugą korzystną dla nas metryką będzie stwierdzenie ile z osób, które zakwalifikowaliśmy do klasy pozytywne, rzeczywiście do niej należy. Pozwoli to oszacować, jak często mylimy się oznaczając rekord klasą pozytywną. Ta metryka nazywa się precyzją (<b>precision</b>):
+
+$$precision = \frac{TP}{TP + FP}$$
+
+Jest to ilość przypadków, w których poprawnie rozpoznaliśmy klasę pozytywną, podzielona przez ilość wszystkich przypadków, w których zwróciliśmy klasę pozytywną.
+
+Ta metryka może być bardzo pomocna, na przykład, przy klasyfikacji spamu. Gorzej będzie, jeśli wrzucimy ważnego maila do spamu, niż przegapimy jakąś reklamę. Chcemy, aby jeśli coś zostało zaklasyfikowane jako spam, rzeczywiście nim było - chcemy jak najwyższą precyzję.
+
+
+<h4> F1 score</h4>
+
+Powyższe metryki mają wadę - pojedynczo można je łatwo oszukać:
+
+<br> Czy chcemy idealną <b>precyzję</b>? - wystarczy zawsze zwracać klasę negatywną (ważny mail nie trafi do spamu, jeśli żadnego z nich tam nie wrzucimy).
+<br> Czy chcemy idealną <b>czułość</b>? - zawsze zwracamy klasę pozytywną (na pewno nie pominiemy chorego pacjenta, jeśli każdemu powiemy, że jest chory).
+
+<br><br>Musimy stosować je w parze. Dla prostoty, często agregujemy je do jednej zagregowanej miary za pomocą średniej harmonicznej. W przypadku liczb z zakresu $[0, 1]$ (a z takimi mamy do czynienia), ona ma taką własność, że wartość wynikowa zawsze będzie bliższa mniejszej wartości. I im większa jest między nimi różnica, tym bardziej jest to widoczne. Przykładowo, dla pary $(100\%, 0\%)$ średnia harmoniczna wynosi $0\%$. Średnia harmoniczna z <b>precyzji</b> i <b>czułości</b> nazywana jest <b>miarą F1</b> (<i>F1 score</i>):
+
+$$F_1 = \frac{2 \cdot precision \cdot recall}{precision + recall}$$
+
+[Ten tutorial](https://mlu-explain.github.io/precision-recall/) ma świetne wizualizację, które w interaktywny sposób prezentują działanie powyższych metryk.
+
+<br><br><b>Uwaga</b>:  indeks dolny w mierze $F_1$ oznacza, że mamy do czyninia z miarą, która daje taką samą wagę precyzji i czułości, ale w ogólnym przypadku jest to parametr, za pomocą którego możemy promować miarę, która ma dla nas większe znaczenie.
+
+F1 score faworyzuje klasyfikatory mające zbliżone wartości precyzji i pełności, ale nie zawsze tego chcemy: czasami zależy nam bardziej  na precyzji lub pełności. na przykład:
+ - klasyfikacja filmów odpowiednich dla dzieci - duża precyzja (wybieraznie tylko odpowiednich filmów) i mała pełność (odrzucanie wiele dobrych filmów, ale za to żaden nieodpowiedni nie przejdzie)
+ - z drugiej strony: przy łapaniu złodziei przez rozpoznwanie obrazu z kamery chcemy wyłapać samych złodziei ale nic się wielkiego nie stanie jak będzie kilka fałszywych alarmów - mała precyzja, duża pełność
+</div>
+
+<div class="one__to_control_all" id="optymalizatory">
+<h3> Gradient prosty (ang. Gradient descent) </h3>
+- prosty algorytm optymalizujący służący do znajdowania optymalnych rozwiązań. Koncepcja polega na wielokrotnym poprawianiu wartości parametrów w celu zminimalizowania funkcji kosztu np. błąd MSE. {GERON s151} 
+<h4> Wsadowy gradient prosty (ang. Batch gradient descend) - BGD </h4>
+- wykorzystuje pełny zbiór danych uczących w każdym przebiegu (=EPOKA) dlatego jest wolny. {GERON 153, 157}
+<h4>  Stochastyczny (=LOSOWY) spadek wzdłuż gradientu (SGD) </h4>
+- zamiast wszystkich danych jak BGD, podczas każdego przebiegu przetwarza losową próbkę danych więc jest szybszy. {GERON s157} 
+<br>- symulowane wyżarzanie -> na początku kroki są duże a potem mniejsze, zapobiega to wejściu w minimum lokalne. {GERON s157}
+<h4> Schodzenie po gradiencie z mini grupami (mini batch g d)  </h4>
+- nie bierzemy całego zbioru danych, ani pojedynczych próbek, ale mini grupy danych – przyspiesza to operacje na macierzach na GPU.{GERON s160}
+
+<h4> Dlatego w sicikitlearn mamy do dyspozycji 2 klasy bo są najlepsze </h4>
+<ol>
+    <li><b>LinearRegresion</b> - używa SVD (Singular Value Decomposition) czyli metoda najmniejszych kwadratów - reprezentacja uczenia na jawnym wzorze</li>
+    <li><b>SGDRegressor</b> - Stochastyczny spadek wzdłuż gradientu - reprezentacja uczenia za pomocą gradientu</li>
+
+</ol>
+
+<h3> Optymalizatory stosowane żeby przyspieszyć algoryt gradientu prostego {368}:</h3>
+
+<br>- wszystkie poniżej omawiane optmalizatory bazują na <b>jakobianach</b> - *pochodnych cząstkowych pierwszego rzędu*, bo sieci mają dużo parametrów a na każdy parametr przypada jeden jakobian, w przypadku pochodnych cząstkowych drugiego rzędu - <b>hesjanach</b>, na każdy parametr przypada kwadrat
+
+<ol>
+<li><tt>optymalizacja momentum</tt> 1964 r Boris Polyak - przyspiesza działanie gradientu prostego przez wprowadzenie nowego parametru beta który jest nazywany momentem albo pędem o zakrsie od 0 do 1, dodaje też wektor momentu 'm' który bierze pod uwagę wcześniejsze gradienty, gradient prosty nie bierze pod uwagę poprzednich gradietów dlatego po zejściu ze stromego nachylenia idzie po mału, a momentum pamięta że właśnie zjechał ze zbocza i mając jeszcze pęd idzie szybciej</li>
+<li><tt>algorytm Nesterova / przyspieszony spadek wzdłóż gradientu - NAG (Nesterov acceleration gradient)</tt> 1983 r Yuriieg Nestorov - pomiar gradientu funkcji kosztu nie w lokalnej pozycji theta, ale nieco z przodu w kierunku pędu theta+beta*m, szybszy od momentum</li>
+<li><tt>AdaGrad adaptiv learning rate</tt> - adaptacyjny współczynnik uczenia, algorytm zmniejsza wektor gradientów wzdłuż najbardziej stromych przebiegów funkcji - **nie nadaje się do głębokich sieci neuronowych** bo zatrzymuje się przed minimum globalnym</li>
+<li><tt>RMSProp</tt> - 2012 r  - przechowuje wyłącznie gradienty z najbardziej aktualnych przebiegów a nie wszystkie od początku nauki, lepszy od AdaGrad</li>
+<li><tt>Adam - (Adaptive moment estimator) - szacowanie adaptacyjnego momentu</tt> - łączy koncepcję momentum i RMSProp , dobry do sieci, ma 3 odmiany:
+    <br>- <tt>AdaMax</tt> - Adam lepszy, ale można spróbować gdzy jest kiepski 
+    <br>- <tt>Nadam</tt> - Adam + sztuczka Nesterowa -  niby lepszy niż Adam ale czasami gorszy
+    <br>- <tt>AdamW</tt> - taka trochę regularyzacja L2
+</li>
+</ol>
+</div>
+
+<div class="one__to_control_all" id="regresja_liniowa">
+
+<h3> Sposoby trenowania modelu regresji:</h3>
+<ol>
+<li>poprzez obliczenie jawnego wzoru wyliczającego parametry:
+    <ul>
+            <li>
+          - równanie normalne
+
+    </li>
+    <li>  - metoda najmniejszych kwadratów - pseudoodwrotność Moore'a-Penrose'a (SVD)</li>
+    </ul>
+
+</li>
+  <li>poprzez iteracyjną metodę optymalizacji - gradient prosty</li>
+</ol>
+- ogólnie oba sposoby są spoko, ale do trenowania gorsze są jawne wzory bo mają większą złożoność obliczeniową gdzy jest dużo cech (ilość danych treningowych nie ma aż takiego znaczenia), więc dla dużej liczby cech w modelu dobry sopsób to gradient {GERON str 151}
+
+<h3> Model</h3>
+model postaci:
+
+$$\hat{y} = ax + b$$
+
+gdzie $\hat{y}$ to zmienna zależna, $x$ to zmienna niezależna (wartość cechy), a współczynniki obliczane są według wzorów opisanych [tutaj](https://www.vedantu.com/formula/linear-regression-formula), bez wątpienia znanych Ci z algebry liniowej i statystyki.
+
+Rozwinięciem regresji liniowej jest wielokrotna regresja liniowa (*multiple linear regression*), która pozwala na wykorzystanie więcej niż jednej cechy do predykcji wartości. W takim modelu predykcja to kombinacja liniowa cech i wag, gdzie każda cecha posiada własną wagę. Więcej o tym mechanizmie możesz przeczytać [tutaj](https://rankia.pl/analizy-gieldowe/co-to-jest-wielokrotna-regresja-liniowa-mlr/). Formalnie jest to model postaci:
+$$\hat{y} = \boldsymbol{w} \cdot \boldsymbol{x} + b = \sum_{i=1}^{d} w_i x_i + b$$
+
+gdzie:
+- $d$ to <b>wymiarowość (dimensionality)</b>, czyli liczba cech
+- $\boldsymbol{w}$ to wektor wag o długości $d$
+- $w_i$ to wagi poszczególnych cech
+- $b$ to <b>wyraz wolny (bias / intercept)</b>, punkt przecięcia ze środkiem układu współrzędnych
+
+Pozostaje pytanie, jak wyznaczyć wagi $\boldsymbol{w}$ i wyraz wolny $b$. Można to robić na różne sposoby, przy czym klasyczna regresja liniowa minimalizuje <b>błąd średniokwadratowy (mean squared error, MSE)</b>. Jest to przykład <b>funkcji kosztu (loss function / cost function)</b>, a konkretnie <b>squared loss / L2 loss</b>. Ma on postać:
+$$L(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n \left( y - \hat{y} \right)^2$$
+
+
+gdzie $\hat{y}$ to wartość przewidywana przez model, $y$ - prawdziwa, a $n$ to liczba punktów w zbiorze.
+
+
+W Scikit-learn ten model implementuje klasa `LinearRegression`. Jej ważne cechy:
+- domyślnie uwzględnia intercept (bias) przez `fit_intercept=True`; jeżeli nasze dane są już wycentrowane, to jest to niepotrzebne i może powodować problemy numeryczne,
+- używa implementacji z pseudoodwrotnością Moore'a-Penrose'a (SVD),
+- nie pozwala na regularyzację, do tego trzeba użyć innych klas.
+
+Jak ocenić, jak taki model sobie radzi? Trzeba tutaj użyć pewnej <b>metryki (metric)</b>, czyli wyznacznika jakości modelu. Można na to patrzeć z wielu różnych perspektyw, w zależności od charakterystyki problemu. Tradycyjnie używa się <b>Root MSE (RMSE)</b>, czyli pierwiastka kwadratowego z MSE. Ma ważne zalety:
+- regresja liniowa z definicji modelu optymalizuje miarę MSE, więc używamy metryki dobrze związanej z modelem,
+- dzięki pierwiastkowaniu ma tę samą jednostkę, co przewidywane wartości. .
+
+Jest też dość czuła na wartości odstające, ale może to być korzystne, w zależności od zastosowania.
+
+$$RMSE(y, \hat{y}) = \sqrt{ \frac{1}{N} \sum_{i=1}^n (y_i - \hat{y}_i)^2}$$
+
+
+
+Minimalizując inne rodzaje błędu, otrzymujemy modele liniowe o innych parametrach, ale tej samej postaci funkcji. Typowo modele te są bardziej odporne na wartości odstające, ale bardziej kosztowne w treningu. Są to np. [quantile regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.QuantileRegressor.html) optymalizująca koszt L1 (*mean absolute error*) czy [Huber regression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.HuberRegressor.html), optymalizująca tzw. Huber loss (połączenie L1 i L2).
+
+Obliczanie regresji liniowej używa pseudoodwrotności Moore'a-Penrose'a i SVD. Objaśnia to dobrze [ten tutorial](https://sthalles.github.io/svd-for-regression/).
+
+<h3> Zbyt małe i nadmierne dopasowanie</h3>
+
+W trakcie trenowania modelu może dojść do sytuacji, w której zostanie on <b>przeuczony (overfitting)</b>. W takim wypadku model nadmiernie dostosowuje się do danych treningowych, "zakuwając" je. Daje wtedy bardzo dokładne wyniki na zbiorze treningowym, ale kiepskie na zbiorze testowym. Modele przeuczone słabo zatem się <b>generalizują (generalization)</b>.
+
+Dlatego wcześniej wydzieliliśmy zbiór testowy, za pomocą którego oceniamy skuteczność naszego modelu. Pozwala to uniknąć powyższego błędu. Przeuczenie bardzo często można rozpoznać właśnie po różnym zachowaniu modelu na danych treningowych i testowych. Jeśli z danymi treningowymi model radzi sobie dużo lepiej, niż z testowymi, to istnieje duże ryzyko, że model został przeuczony i skupił się na zapamiętywaniu konkretnych przykładów, na których się uczył, niż na wyciąganiu z nich uniwersalnych wzorców. Taki model słabo się generalizuje i nie poradzi sobie z nowymi danymi.
+
+Sprawdza się to następująco:
+- obliczamy błąd treningowy oraz testowy,
+- jeżeli oba błędy są wysokie, to mamy zbyt małe dopasowanie (*underfitting*) i trzeba użyć pojemniejszego modelu,
+- jeżeli błąd treningowy jest dużo niższy od testowego, to mamy nadmierne dopasowanie (*overfitting*) i model trzeba regularyzować.
+
+W praktyce paradoksalnie często model o większej pojemności z mocną regularyzacją działa lepiej od prostszego modelu ze słabą regularyzacją. Wyjaśnianie, czemu tak jest, to otwarty problem naukowy, szczególnie w kontekście sieci neuronowych.
+
+Przeuczenie modelu jest bardzo istotnym problemem w sztucznej inteligencji i istnieje szereg metod, służących zapobieganiu tego zjawiska. Jedną z nich jest regularyzacja - do globalnej funkcji błędu dodawane są "kary" za tworzenie zbyt złożonych modeli. Typowe metody regularyzacji to L1 oraz L2, które penalizują wielkość parametrów obliczonych w trakcie treningu. Obie te wartości są tak naprawdę normami (odpowiednio `l1` i `l2`) wektorów wag modelu, przeskalowanymi przez określoną wartość. Dodawanie tych kar ma zapobiec przeuczeniu, bo typowo duże wagi w regresji liniowej i podobnych modelach oznaczają przeuczenie.
+
+Czemu tak jest? Przeuczenie bierze się z tego, że nasz model "zakuwa" zbiór treningowy, ucząc się <b>szumu (noise)</b> w danych, przypisując nadmierne znaczenie niewielkim różnicom w wartościach cech. Jeżeli cecha ma dużą wagę, to nawet niewielka zmiana jej wartości bardzo zmienia finalną predykcję (która jest kombinacją liniową). Dzięki regularyzacji, jeżeli model podczas treningu będzie chciał zwiększyć wagę dla cechy, to musi mu się to opłacać. Innymi słowy, zwiększenie wagi cechy musi zmniejszyć koszt (np. MSE) bardziej, niż wzrośnie kara z regularyzacji.
+
+Jak słusznie się domyślić, zbyt duże kary spowoduję z kolei niedouczenie (ang. *underfitting*). Więcej o konstrukcji i zastosowaniach regularyzacji L1 i L2 możesz przeczytać [tutaj](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261).
+
+W praktyce detekcja nadmiernego dopasowania nie musi być wcale taka oczywista. Nasz model może przeuczać się tylko na niektórych segmentach danych, dla nietrywialnych kombinacji cech etc. Testowanie modeli ML i detekcja overfittingu jest otwartym problemem badawczym, ale powstają już pierwsze narzędzia do tego, np. [Giskard](https://github.com/Giskard-AI/giskard).
+
+<h3> Regresja regularyzowana (L2 ridge, L1 LASSO, L1+L2 ElasticNet)</h3>
+
+Regularyzacja zmniejsza pojemność modelu regresji liniowej, narzucając mniejsze wagi poprzez penalizację dużych wag w funkcji kosztu. Regresja liniowa z regularyzacją L2 nazywa się *ridge regression*, z regularyzacją L1 - *LASSO regression*, a z oboma naraz - *ElasticNet regression*. Formalnie mamy:
+$$L_{ridge}(y, \hat{y}) = \frac{1}{n} (y - \hat{y})^2 + \lambda ||\boldsymbol{w}||_2^2$$
+
+$$L_{LASSO}(y, \hat{y}) = \frac{1}{n} (y - \hat{y})^2 + \alpha ||\boldsymbol{w}||_1$$
+
+$$L_{ElasticNet}(y, \hat{y}) = \frac{1}{n} (y - \hat{y})^2 + \lambda ||\boldsymbol{w}||_2^2 + \alpha ||\boldsymbol{w}||_1$$
+
+
+
+Jak widać, regularyzacja dodaje do zwykłego kosztu MSE dodatkowe wyrazy, penalizujące wielkość wag $\boldsymbol{w}$. <b>Siłę regularyzacji (regularization strength)</b>, czyli jak mocna jest taka kara, wyznacza współczynnik, oznaczany typowo $\lambda$ albo $\alpha$. Jest to <b>hiperparametr (hyperparameter)</b>, czyli stała modelu, którą narzucamy z góry, przed treningiem. Nie jest on uczony z danych. Jak go dobrać, omówimy poniżej.
+
+Regresja ridge (L2) zmniejsza wagi i jest różniczkowalna (szybsza i łatwiejsza w treningu). Regresja LASSO (L1) dokonuje <b>selekcji cech (feature selection)</b>, zmniejszając często wagi cech dokładnie do zera, eliminując tym samym słabe cechy. Oba naraz realizuje model ElasticNet.
+
+
+W Scikit-learn implementują je klasy `Ridge`, `Lasso` oraz `ElasticNet`. Najważniejszy hiperparametr każdego z tych modeli to siła regularyzacji, która we wszystkich klasach to `alpha`. Scikit-learn definiuje regularyzację ElasticNet dość specyficznie, za pomocą parametru `l1_ratio`, który wyznacza, jaki ułamek siły regularyzacji przypada dla L1, a jaki dla L2:
+$$L_{ElasticNet}(y, \hat{y}) = \frac{1}{n} \sum_{i=1}^n \left( y - \hat{y} \right)^2 + \alpha \cdot (1 - L1\_ratio) \cdot ||\boldsymbol{w}||_2^2 + \alpha \cdot L1\_ratio \cdot ||\boldsymbol{w}||_1 \\$$
+
+
+Inne ważne uwagi:
+- liczba iteracji `max_iter` wyznacza liczbę iteracji solwera; im więcej, tym dokładniejsze rozwiązanie, ale tym dłuższy czas obliczeń,
+- jeżeli `max_iter` będzie zbyt mała i algorytm nie osiągnie zbieżności, to dostaniemy ostrzeżenie, wtedy zwykle trzeba po prostu ją zwiększyć, np. 10-krotnie,
+- jeżeli nie potrzebujemy bardzo precyzyjnego rozwiązania, można ustawić większe `tol` dla przyspieszenia obliczeń.
+
+Jako że nasz model jest regularyzowany i nie ma ryzyka problemów numerycznych, to teraz już obliczamy intercept.
+
+<h3> Tuning hiperparametrów, zbiór walidacyjny</h3>
+
+Praktycznie wszystkie modele ML mają hiperparametry, często liczne, które w zauważalny sposób wpływają na wyniki, a szczególnie na underfitting i overfitting. Ich wartości trzeba dobrać zatem dość dokładnie. Jak to zrobić? Proces doboru hiperparametrów nazywa się <b>tuningiem hiperparametrów</b> (*hyperparameter tuning*).
+
+Istnieje na to wiele sposobów. Większość z nich polega na tym, że trenuje się za każdym razem model z nowym zestawem hiperparametrów i wybiera się ten zestaw, który pozwala uzyskać najlepsze wyniki. Metody głównie różnią się między sobą sposobem doboru kandydujących zestawów hiperparametrów.
+
+Najprostsze i najpopularniejsze to:
+
+* <b>pełne przeszukiwanie</b> (*grid search*) - definiujemy możliwe wartości dla różnych hiperparametrów, a metoda sprawdza ich wszystkie możliwe kombinacje (czyli siatkę),
+* <b>losowe przeszukiwanie</b> (*randomized search*) - definiujemy możliwe wartości jak w pełnym przeszukiwaniu, ale sprawdzamy tylko ograniczoną liczbę losowo wybranych kombinacji.
+
+Jak ocenić, jak dobry jest jakiś zestaw hiperparametrów? Nie możemy sprawdzić tego na zbiorze treningowym - wyniki byłyby zbyt optymistyczne. Nie możemy wykorzystać zbioru testowego - mielibyśmy data leakage, bo wybieralibyśmy model explicite pod nasz zbiór testowy. Trzeba zatem osobnego zbioru, na którym będziemy na bieżąco sprawdzać jakość modeli dla różnych hiperparametrów. Jest to <b>zbiór walidacyjny</b> (*validation set*).
+
+Zbiór taki wycina się ze zbioru treningowego. Dzielimy zatem nasze dane nie na dwie, ale trzy części: treningową, walidacyjną i testową. Typowe proporcje to 60-20-20% lub 80-10-10%.
+
+Metody tuningu hiperparametrów są zaimplementowane w Scikit-Learn jako `GridSearchCV` oraz `RandomizedSearchCV`. Są też bardziej wyspecjalizowane metody dla konkretnych modeli, które są dla nich typowo o wiele szybsze.
+
+<b>Uwaga:</b> warto zauważyć, że liczba możliwych kombinacji rośnie gwałtownie wraz z liczbą hiperparametrów i ich możliwych wartości. Mając siatkę na 3 hiperparametry po 10 możliwych wartości dla każdego, otrzymujemy 1000 możliwych kombinacji. W pracy w ML płacą nam też za to, że wiemy, jakie siatki dobrać :)
+
+Szczególnie inteligentne są metody tuningu z grupy metod optymalizacji bayesowskiej (Bayesian hyperparameter optimization / Bayesian HPO). Są to np. procesy Gaussowskie oraz Tree Parzen Estimator (TPE). Wykorzystują one dość zaawansowaną statystykę, aby zamodelować, jak poszczególne hiperparametry wpływają na wynik i dobierają takie kolejne kombinacje hiperparametrów, które są ich zdaniem najbardziej obiecujące. W szczególności wiele z tych metod traktuje dobór hiperparametrów jak problem regresji, gdzie parametrami są hiperparametry modelu, które dobieramy.
+
+Takich metod szczególnie często używa się przy tuningu hiperparametrów dla sieci neuronowej, gdyż jej wytrenowanie jest czasochłonne, a więc nie możemy pozwolić sobie na sprawdzenie licznych kombinacji, bo zbyt dużo by nas to kosztowało.
+
+Ta metoda została zaimplementowana w wielu frameworkach, jak np. Optuna czy Hyperopt. Więcej można o nich przeczytać [tutaj](https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f).
+
+
+<h3> Walidacja skrośna</h3>
+
+Jednorazowy podział zbioru na części nazywa się *split validation* lub *holdout*. Używamy go, gdy mamy sporo danych, i 10-20% zbioru jako dane walidacyjne czy testowe to dość dużo, żeby mieć przyzwoite oszacowanie. Zbyt mały zbiór walidacyjny czy testowy da nam mało wiarygodne wyniki - nie da się nawet powiedzieć, czy zbyt pesymityczne, czy optymistyczne! W praktyce niestety często mamy mało danych. Trzeba zatem jakiejś magicznej metody, która stworzy nam więcej zbiorów walidacyjnych z tej samej ilości danych.
+
+Taką metodą jest <b>walidacja skrośna</b> (*cross-validation, CV*). Polega na tym, że dzielimy zbiór na K równych podzbiorów, tzw. *foldów*. Każdy podzbiór po kolei staje się zbiorem walidacyjnym, a pozostałe łączymy w zbiór treningowy. Przykładowo, jeżeli mamy 5 foldów (1, 2, 3, 4, 5), to będziemy mieli po kolei:
+- zbiór treningowy: (2, 3, 4, 5), walidacyjny: (1)
+- zbiór treningowy: (1, 3, 4, 5), walidacyjny: (2)
+- zbiór treningowy: (1, 2, 4, 5), walidacyjny: (3)
+- zbiór treningowy: (1, 2, 3, 5), walidacyjny: (4)
+- zbiór treningowy: (1, 2, 3, 4), walidacyjny: (5)
+
+Trenujemy zatem K modeli dla tego samego zestawu hiperparametrów i każdy testujemy na zbiorze walidacyjnym. Mamy K wyników dla zbiorów walidacyjnych, które możemy uśrednić (i ew. obliczyć odchylenie standardowe). Takie wyniki są znacznie bardziej wiarygodne zgodnie ze statystyką (moc statystyczna itp.). Typowo używa się 5 lub 10 foldów, co jest dobrym balansem między liczbą modeli do wytrenowania i wielkością zbiorów walidacyjnych.
+
+Szczególnym przypadkiem jest Leave-One-Out Cross-Validation (LOOCV), w którym ilość podzbiorów (*foldów*) jest równa ilości rekordów. Czyli w danej chwili tylko 1 przykład jest zbiorem walidacyjnym. Daje to możliwość prawie całkowitego wykorzystania naszych danych (w każdej iteracji musimy wydzielić tylko 1 przykład na zbiór walidacyjny, cała reszta jest naszym zbiorem treningowym), ale wprowadza ogromny koszt obliczeniowy. Jest to opłacalne tylko w szczególnych przypadkach.
+
+Można zauważyć, że w nazwach klas do tuningu parametrów, wspomnianych wyżej, mamy sufiks `CV` - to jest właśnie *Cross Validation*.
+
+Walidacji skrośnej można użyć także do testowania, tworząc wiele zbiorów testowych. Można połączyć obie techniki, co daje tzw. [nested cross-validation](https://vitalflux.com/python-nested-cross-validation-algorithm-selection/). Jest to bardzo kosztowna, ale jednocześnie bardzo precyzyjna technika.
+
+<h4> RidgeCV, LassoCV, ElasticNetCV</h4>
+
+W przypadku regresji liniowej istnieją bardzo wydajne implementacje walidacji skrośnej, głównie dzięki prostocie tego modelu. W Scikit-learn są to odpowiednio `RidgeCV`, `LassoCV` oraz `ElasticNetCV`.
+
+`RidgeCV` domyślnie wykorzystuje efektywną implementację Leave-One-Out Cross-Validation (LOOCV). Jest to możliwe dzięki pewnym sztuczkom opartym na algebrze liniowej, wyjaśnionych [w dokumentacji w kodzie](https://github.com/scikit-learn/scikit-learn/blob/8c9c1f27b7e21201cfffb118934999025fd50cca/sklearn/linear_model/_ridge.py#L1547) (dla zainteresowanych). Co ważne, jest to operacja o wiele szybsza niż osobne grid search + ridge regression, a nawet od `RidgeCV` z mniejszą liczbą foldów.
+
+`LassoCV` oraz `ElasticNetCV` iterują od najmniejszych do największych wartości `alpha` (siły regularyzacji), używając rozwiązania dla mniejszej siły regularyzacji jako punktu początkowego dla kolejnej wartości. Odpowiada to po prostu dość inteligentnemu wyborowi punktu startowego w optymalizacji funkcji kosztu, a znacznie obniża koszt obliczeniowy.
+
+
+
+<h3> Regresja wielomianowa</h3>
+
+Regresja wielomianowa to po prostu dodanie wielomianów cech do naszych danych:
+$$[a, b, c, d] -> [a, b, c, d, a^2, b^2, c^2, d^2, ab, ac, ad, bc, bd, cd]$$
+
+Pozwala to na uwzględnienie bardziej złożonych kombinacji cech, których sama regresja liniowa, ze względu na swoją prostotę, nie jest w stanie uwzględnić.
+
+W Scikit-learn regresja wielomianowa składa się z 2 osobnych kroków: wygenerowania cech wielomianowych i użycia zwykłej regresji liniowej. Pozwala to na użycie tej transformacji dla dowolnych algorytmów, nie tylko regresji liniowej.
+
+Kwestią sporną jest, czy jest sens przeprowadzać taką transformację dla zmiennych po one-hot encodingu. Potęgi na pewno nie mają sensu, natomiast interakcje realizują po prostu operację koniunkcji (AND), ale łatwo prowadzi to do eksplozji wymiarowości. Dla uproszczenia poniżej zastosujemy transformację dla wszystkich cech.
+
+Warto pamiętać, że jeżeli używamy modelu, który sam dodaje intercept (jak regresja liniowa), to trzeba przekazać `include_bias=False`. Żeby wymiarowość zbytnio nam nie urosła, użyjemy `interaction_only=True`.
+
+
+<h3> Co zrobić gdy model dla nowych danych jest obarczony zbyt dużym błędem?</h3>
+
+<b>1.</b> Jeżeli stosujemy metodę gradientową należy sprawdzić czy poprawnie dobraliśmy współczynnik uczenia α oraz czy liczba iteracji jest wystarczająca.
+
+<b>2.</b> Należy sprawić czy mamy do czynienia z niedouczeniem czy przeuczeniem
+  - a) <b>Niedouczenie</b> (problem z biasem):
+      - wprowadzenie dodatkowych (nowych) cech,
+      - wprowadzenie dodatkowych cech w oparciu o już uwzględnione,
+      - zmniejszenie współczynnika regularyzacji.
+   - b) <b>Przeuczenie</b> (problem z wariancją):
+      - zwiększenie liczby danych uczących,
+      - zmniejszenie liczby cech,
+      - zwiększenie współczynnika regularyzacji.
+
+<h4> Równanie normalne</h4> – jawne rozwiązanie {GERON s148}
+
+</div>
+
+<div class="one__to_control_all" id="regresja_logistyczna">
+
+
+<br>Regresja logistyczna jest modelem, który pozwala na przewidywanie wartości zmiennych dychotomicznych w oparciu o jedną lub większą liczbę cech. Funkcją bazową regresji logistycznej jest funkcja logistyczna. Bardzo ciekawe podsumowanie dotyczące matematyki stojącej za regresją logistyczną znajdziesz [tu](https://philippmuens.com/logistic-regression-from-scratch).
+
+<br><br>Do klasyfikacji wykorzystamy zbiór [Bank Marketing](https://archive.ics.uci.edu/ml/datasets/bank+marketing), w którym przewiduje się, czy dana osoba będzie zainteresowana lokatą terminową w banku. Precyzyjny targetowany marketing jest ważny z perspektywy biznesu, bo w praktyce chce się reklamować tak mało, jak to możliwe. Bank zarabia tylko na tych osobach, które są faktycznie zainteresowane reklamą, a pozostałych można łatwo zrazić zbyt dużą liczbą reklam, więc precyzyjna ocena przynosi tu realne zyski.
+
+<br><br>Zbiór posiada dwie wersje, uproszczoną oraz rozszerzoną o dodatkowe atrybuty socjoekonomiczne (np. sytuację ekonomiczną w planowanym momencie reklamy). Wykorzystamy tę drugą, bo są to bardzo wartościowe cechy. Dodatkowo każda wersja posiada pełny zbiór (ok. 45 tysięcy przykładów) oraz pomniejszony (ok. 4 tysiąca przykładów). Dzięki skalowalności regresji logistycznej możemy bez problemu wykorzystać pełny zbiór z dodatkowymi cechami.
+
+Opisy zmiennych znajdują się w pliku [bank_marketing_description.txt](bank_marketing_description.txt).
+
+### Metryki klasyfikacji binarnej
+
+W klasyfikacji binarnej mamy tylko dwie klasy, z konwencji oznaczamy jedną klasę jako negatywną, a drugą - pozytywną. W naszym przypadku klasą negatywną będą osoby niezainteresowane lokatą - nie chcemy im pokazywać naszych reklam, bo to będzie raczej nieskuteczne, a reklama kosztuje. Naszym targetem będą osoby oznaczone klasą pozytywną.
+
+Wytrenowaliśmy model, ale jak sprawdzić jakość jego działania? Metryki z regresji raczej za wiele nam nie pomogą. Potrzebujemy zdefiniować nowe.
+
+</div>
+
+<div class="one__to_control_all" id="regresja_logistyczna">
+    trza zrobić
+</div>
+
+<div class="one__to_control_all" id="klasteryzacja">
+
+<h2>Klasteryzacja(ang. clustering) analiza skupień/grupowanie - Uczenie nienadzorowane</h2>
+
+<h3> 1. Algorytm centroidów / k-średnich (ang. k-means)</h3>
+
+<h3> 2. Algorytm DBSCAN (Density Based Spatial Clusteering of Applications with Noise) </h3>- gęstościowe grupowanie skupień aplikacji z uwzględnieniem szumu
+
+<h3> 3. Grupowanie hierarchiczne - budowa klastrów od dołu do góry (bottom-up)</h3>
+Działanie algorytmu:
+  - 1. Stwórz klaster dla każdej próbki wejściowej
+  - 2. Jeżeli istnieje wiele klastrów to znajdz dwa klastry które są najbliżej siebie i je połącz.
+- algorytm działa aż zrobi jeden wielki klaster
+- jeśli chcemy uzyskać np 3 klastry to cofamy się o 2 poziomy do tyłu itd.
+
+<h3> 4.Klasteryzacja oparta na modelu </h3>-  Model mieszaniny gaussowskiej GMM (Gaussian Mixture Model)
+- model probabilistyczny w którym zakładamy że każdy klaster w danych ma inny rozkład gaussowski o kształcie eplisy
+- wykrywanie anomalii - każdy przykład który znajduje się poza obszarem rozkładu (o małej gęstości) uznawany jest za odstający 
+
+
+
+<h3> Ocena jakości modeli grupujących</h3>
+- odchylenie wewnątrzklasowe - średnia odległość przypadku od środka klastra do którego jest przypisany
+- odchylenie międzyklastrowe - średnia odległość przypadków od środków pozostałych klastrów
+-  Stosunek: odchylenie wewnątrzklasowe / odchylenie międzyklastrowe  - im większa wartość tym lepszy wynik grupowania
+
+<div class="dottedline"></div>
+<h2>Wykrywanie anomalii</h2> 
+
+<h3> wielowymiarowy rozkład normalny</h3>
+- opisuje rozkład pojedynczej zmiennej w wielu wymiarach - co pozwala na odróżnienie anomalii takiej zmiennej, np wskażnika temperatury 
+  składającego się z x1 i x2 czyli temp. parteru i piętra, te punkty w 2 wymiarach są punktami na wykresie punktowym  
+
+</div>
+
+<div class="one__to_control_all" id="drzewa" >
+    <h3> Prosta klasyfikacja</h3>
+
+Zanim przejdzie się do modeli bardziej złożonych, trzeba najpierw wypróbować coś prostego, żeby mieć punkt odniesienia. Tworzy się dlatego <b>modele bazowe (baselines)</b>.
+
+<br>W naszym przypadku będzie to <b>drzewo decyzyjne (decision tree)</b>. Jest to drzewo binarne z decyzjami if-else, prowadzącymi do klasyfikacji danego przykładu w liściu. Każdy podział w drzewie to pytanie postaci "Czy wartość cechy X jest większa lub równa Y?". Trening takiego drzewa to prosty algorytm zachłanny, bardzo przypomina budowę zwykłego drzewa binarnego. Ma on następujące kroki dla każdego węzła tego drzewa:
+<br>1. Sprawdź po kolei wszystkie możliwe punkty podziału, czyli każdą (unikalną) wartość każdej cechy, po kolei.
+<br>2. Dla każdego przypadku podziel zbiór na 2 części: niespełniający warunku (lewy potomek) i spełniający warunek (prawy potomek).
+<br>3. Oblicz jakość podziału według wybranej funkcji jakości. Im lepiej warunek rozdziela klasy od siebie (imbardziej zunifikowane są węzły-dzieci), tym wyższa jakość podziału. Innymi słowy, chcemy, żeby do jednego dziecka trafiła jedna klasa, a do drugiego druga.
+<br>4. Wybierz podział o najwyższej jakości.
+
+<br><br>Taki algorytm wykonuje się rekurencyjnie, aż otrzymamy węzeł czysty (pure leaf), czyli taki, w którym są przykłady z tylko jednej klasy. Typowo wykorzystywaną funkcją jakości (kryterium podziału) jest entropia Shannona - im niższa entropia, tym bardziej jednolite są klasy w węźle (czyli wybieramy podział o najniższej entropii).
+
+<br><br>Powyższe wytłumaczenie algorytmu jest oczywiście nieformalne i dość skrótowe. Doskonałe tłumaczenie, z interaktywnymi wizualizacjami, dostępne jest [tutaj](https://mlu-explain.github.io/decision-tree/). W formie filmów - [tutaj](https://www.youtube.com/watch?v=ZVR2Way4nwQ) oraz [tutaj](https://www.youtube.com/watch?v=_L39rN6gz7Y). Dla drzew do regresji - [ten film](https://www.youtube.com/watch?v=g9c66TUylZ4).
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/trii.png" alt=""> 
+</div>
+
+<br><br>Warto zauważyć, że taka konstrukcja prowadzi zawsze do overfittingu. Otrzymanie liści czystych oznacza, że mamy 100% dokładności na zbiorze treningowym, czyli perfekcyjnie przeuczony klasyfikator. W związku z tym nasze predykcje mają bardzo niski bias, ale bardzo dużą wariancję. Pomimo tego drzewa potrafią dać bardzo przyzwoite wyniki, a w celu ich poprawy można je regularyzować, aby mieć mniej "rozrośnięte" drzewo. [Film dla zainteresowanych](https://www.youtube.com/watch?v=D0efHEJsfHo).
+
+<br><br>Mając wytrenowany klasyfikator, trzeba oczywiście sprawdzić, jak dobrze on sobie radzi. Tu natrafiamy na kolejny problem z klasyfikacją niezbalansowaną - zwykła celność (accuracy) na pewno nie zadziała! Typowo wykorzystuje się AUC, nazywane też AUROC (Area Under Receiver Operating Characteristic), bo metryka ta uwzględnia niezbalansowanie klas. 
+
+<br><br>Bardzo dobre i bardziej szczegółowe wytłumaczenie, z interktywnymi wizualizacjami, można znaleźć [tutaj](https://mlu-explain.github.io/roc-auc/). Dla preferujących filmy - [tutaj](https://www.youtube.com/watch?v=4jRBRDbJemM).
+
+<br>Co ważne, z definicji AUROC, trzeba w niej użyć <b>prawdopodobieństw klasy pozytywnej</b> (klasy 1). W Scikit-learn'ie zwraca je metoda `.predict_proba()`, która w kolejnych kolumnach zwraca prawdopodobieństwa poszczególnych klas.
+
+
+<h3> Uczenie zespołowe, bagging, lasy losowe</h3>
+
+Bardzo często wiele klasyfikatorów działających razem daje lepsze wyniki niż pojedynczy klasyfikator. Takie podejście nazywa się <b>uczeniem zespołowym (ensemble learning)</b>. Istnieje wiele różnych podejść do tworzenia takich klasyfikatorów złożonych (ensemble classifiers).
+
+<br><br>Podstawową metodą jest <b>bagging</b>:
+<br>1. Wylosuj N (np. 100, 500, ...) próbek bootstrapowych (bootstrap sample) ze zbioru treningowego. Próbka bootstrapowa to po prostu losowanie ze zwracaniem, gdzie dla wejściowego zbioru z M wierszami losujemy M próbek (czyli tyle ile było w początkowym zbiorze), spośród N wylosowanych próbek. Będą tam powtórzenia, średnio nawet 1/3, ale się tym nie przejmujemy.
+<br>2. Wytrenuj klasyfikator bazowy (base classifier) na każdej z próbek bootstrapowych.
+<br>3. Stwórz klasyfikator złożony poprzez uśrednienie predykcji każdego z klasyfikatorów bazowych.
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/Ensemble_Bagging.png" alt=""> 
+</div>
+
+
+
+<br><br>Typowo klasyfikatory bazowe są bardzo proste, żeby można było szybko wytrenować ich dużą liczbę. Prawie zawsze używa się do tego drzew decyzyjnych. Dla klasyfikacji uśrednienie wyników polega na głosowaniu - dla nowej próbki każdy klasyfikator bazowy ją klasyfikuje, sumuje się głosy na każdą klasę i zwraca najbardziej popularną decyzję.
+
+<br>Taki sposób uczenia zmniejsza wariancję klasyfikatora. Intuicyjnie, skoro coś uśredniamy, to siłą rzeczy będzie mniej rozrzucone, bo dużo ciężej będzie osiągnąć jakąś skrajność. Redukuje to też overfitting.
+
+<br><br><b>Lasy losowe (Random Forests)</b> to ulepszenie baggingu. Zaobserwowano, że pomimo losowania próbek bootstrapowych, w baggingu poszczególne drzewa są do siebie bardzo podobne (są skorelowane), używają podobnych cech ze zbioru. My natomiast chcemy zróżnicowania, żeby mieć niski bias - redukcją wariancji zajmuje się uśrednianie. Dlatego używa się metody losowej podprzestrzeni (random subspace method) - przy każdym podziale drzewa losuje się tylko pewien podzbiór cech, których możemy użyć do tego podziału. Typowo jest to pierwiastek kwadratowy z ogólnej liczby cech.
+
+<br><br>Zarówno bagging, jak i lasy losowe mają dodatkowo bardzo przyjemną własność - są mało czułe na hiperparametry, szczególnie na liczbę drzew. W praktyce wystarczy ustawić 500 czy 1000 drzew i klasyfikator będzie dobrze działać. Dalsze dostrajanie hiperparametrów może jeszcze trochę poprawić wyniki, ale nie tak bardzo, jak przy innych klasyfikatorach. Jest to zatem doskonały wybór domyślny, kiedy nie wiemy, jakiego klasyfikatora użyć.
+
+<br>Dodatkowo jest to problem <b>embarassingly parallel</b> - drzewa można trenować w 100% równolegle, dzięki czemu jest to dodatkowo wydajna obliczeniowo metoda.
+
+<br>Głębsze wytłumaczenie, z interaktywnymi wizualizacjami, można znaleźć [tutaj](https://mlu-explain.github.io/random-forest/). Dobrze tłumaczy je też [ta seria filmów](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ&t=480s).
+
+
+<h3> Oversampling, SMOTE</h3>
+
+
+W przypadku zbiorów niezbalansowanych można dokonać <b>balansowania (balancing)</b> zbioru. Są tutaj 2 metody:
+<br>- <b>undersampling</b>: usunięcie przykładów z klasy dominującej
+<br>- <b>oversampling</b>: wygenerowanie dodatkowych przykładów z klasy mniejszościowej
+
+<br><br>Undersampling działa dobrze, kiedy niezbalansowanie jest niewielkie, a zbiór jest duży (możemy sobie pozwolić na usunięcie jego części). Oversampling typowo daje lepsze wyniki, istnieją dla niego bardzo efektywne algorytmy. W przypadku bardzo dużego niezbalansowania można zrobić oba.
+
+<br><br>Typowym algorytmem oversamplingu jest <b>SMOTE (Synthetic Minority Oversampling TEchnique)</b>. Działa on następująco:
+<br>1. Idź po kolei po przykładach z klasy mniejszościowej.
+<br>2. Znajdź `k` najbliższych przykładów dla próbki, typowo `k=5`.
+<br>3. Wylosuj tylu sąsiadów, ile trzeba do oversamplingu, np. jeżeli chcemy zwiększyć klasę mniejszościową 3 razy (o 200%), to wylosuj 2 z 5 sąsiadów.
+<br>4. Dla każdego z wylosowanych sąsiadów wylosuj punkt na linii prostej między próbką a tym sąsiadem. Dodaj ten punkt jako nową próbkę do zbioru.
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/smote.png" alt=""> 
+</div>
+
+<br>Taka technika generuje przykłady bardzo podobne do prawdziwych, więc nie zaburza zbioru, a jednocześnie pomaga klasyfikatorom, bo "zagęszcza" przestrzeń, w której znajduje się klasa pozytywna.
+
+<br>Algorytm SMOTE, jego warianty i inne algorytmy dla problemów niezbalansowanych implementuje biblioteka Imbalanced-learn.
+SMOTE używa się do zbalansowania zbioru treningowego (nie używa się go na zbiorze testowym!)
+
+
+<h3> Dostrajanie (tuning) hiperparametrów</h3>
+Lasy losowe są stosunkowo mało czułe na dobór hiperparametrów - i dobrze, bo mają ich dość dużo. Można zawsze jednak spróbować to zrobić, a w szczególności najważniejszy jest parametr `max_features`, oznaczający, ile cech losować przy każdym podziale drzewa. Typowo sprawdza się wartości z zakresu `[0.1, 0.5]`.
+
+<br>W kwestii szybkości, kiedy dostrajamy hiperparametry, to mniej oczywiste jest, jakiego `n_jobs` użyć. Z jednej strony klasyfikator może być trenowany na wielu procesach, a z drugiej można trenować wiele klasyfikatorów na różnych zestawach hiperparametrów równolegle. Jeżeli nasz klasyfikator bardzo dobrze się uwspółbieżnia (jak Random Forest), to można dać mu nawet wszystkie rdzenie, a za to wypróbowywać kolejne zestawy hiperparametrów sekwencyjnie. Warto ustawić parametr `verbose` na 2 lub więcej, żeby dostać logi podczas długiego treningu i mierzyć czas wykonania. W praktyce ustawia się to metodą prób i błędów.
+
+<br>W praktycznych zastosowaniach osoba trenująca model wedle własnego uznana, doświadczenia, dostępnego czasu i zasobów wybiera, czy dostrajać hiperparametry i w jak szerokim zakresie. Dla Random Forest na szczęście często może nie być znaczącej potrzeby i za to go lubimy :)
+
+<b>Random Forest - podsumowanie</b>
+
+1. Model oparty o uczenie zespołowe.
+<br>2. Kluczowe elementy:
+   - bagging: uczenie wielu klasyfikatorów na próbkach bootstrapowych,
+   - metoda losowej podprzestrzeni: losujemy podzbiór cech do każdego podziału drzewa,
+   - uśredniamy głosy klasyfikatorów.
+<br>3. Dość odporny na overfitting, zmniejsza wariancję błędu dzięki uśrednianiu.
+<br>4. Mało czuły na hiperparametry.
+<br>5. Przeciętnie daje bardzo dobre wyniki, doskonały wybór domyślny przy wybieraniu algorytmu klasyfikacji.
+
+
+<h3> Boosting</h3>
+
+<br>Drugą bardzo ważną grupą algorytmów ensemblingu jest <b>boosting</b>, też oparty o drzewa decyzyjne. O ile Random Forest trenował wszystkie klasyfikatory bazowe równolegle i je uśredniał, o tyle boosting robi to sekwencyjnie. Drzewa te uczą się na całym zbiorze, nie na próbkach bootstrapowych. Idea jest następująca: trenujemy drzewo decyzyjne, radzi sobie przeciętnie i popełnia błędy na częsci przykładów treningowych. Dokładamy kolejne, ale znające błędy swojego poprzednika, dzięki czemu może to uwzględnić i je poprawić. W związku z tym "boostuje" się dzięki wiedzy od poprzednika. Dokładamy kolejne drzewa zgodnie z tą samą zasadą.
+
+<br>Jak uczyć się na błędach poprzednika? Jest to pewna <b>funkcja kosztu</b> (błędu), którą chcemy zminimalizować. Zakłada się jakąś jej konkretną postać, np. squared error dla regresji, albo logistic loss dla klasyfikacji. Później wykorzystuje się spadek wzdłuż gradientu (gradient descent), aby nauczyć się, w jakim kierunku powinny optymalizować kolejne drzewa, żeby zminimalizować błędy poprzednika. Jest to konkretnie <b>gradient boosting</b>, absolutnie najpopularniejsza forma boostingu, i jeden z najpopularniejszych i osiągających najlepsze wyniki algorytmów ML.
+
+<br>Tyle co do intuicji. Ogólny algorytm gradient boostingu jest trochę bardziej skomplikowany. Bardzo dobrze i krok po kroku tłumaczy go [ta seria filmów na YT](https://www.youtube.com/watch?v=3CC4N4z3GJc). Szczególnie ważne implementacje gradient boostingu to <b>XGBoost (Extreme Gradient Boosting)</b> oraz <b>LightGBM (Light Gradient Boosting Machine)</b>. XGBoost był prawdziwym przełomem w ML, uzyskując doskonałe wyniki i bardzo dobrze się skalując - był wykorzystany w CERNie do wykrywania cząstki Higgsa w zbiorze z pomiarów LHC mającym 10 milionów próbek. Jego implementacja jest dość złożona, ale dobrze tłumaczy ją [inna seria filmików na YT](https://www.youtube.com/watch?v=OtD8wVaFm6E).
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/xgboost.png" alt=""> 
+</div>
+
+<br>Obecnie najczęściej wykorzystuje się LightGBM. Został stworzony przez Microsoft na podstawie doświadczeń z XGBoostem. Został jeszcze bardziej ulepszony i przyspieszony, ale różnice są głównie implementacyjne. Różnice dobrze tłumaczy [ta prezentacja z konferencji PyData](https://www.youtube.com/watch?v=5CWwwtEM2TA) oraz [prezentacja Microsoftu](https://www.youtube.com/watch?v=5nKSMXBFhes). Dla zainteresowanych - [praktyczne aspekty LightGBM](https://www.kaggle.com/code/prashant111/lightgbm-classifier-in-python/notebook).
+
+<br>Boosting dzięki uczeniu na poprzednich drzewach redukuje nie tylko wariancję, ale też bias w błędzie, dzięki czemu może w wielu przypadkach osiągnąć lepsze rezultaty od lasu losowego. Do tego dzięki znakomitej implementacji LightGBM jest szybszy.
+
+<br>Boosting jest jednak o wiele bardziej czuły na hiperparametry niż Random Forest. W szczególności bardzo łatwo go przeuczyć, a większość hiperparametrów, których jest dużo, wiąże się z regularyzacją modelu. To, że teraz poszło nam lepiej z domyślnymi, jest rzadkim przypadkiem.
+
+<br>W związku z tym, że przestrzeń hiperparametrów jest duża, przeszukanie wszystkich kombinacji nie wchodzi w grę. Zamiast tego można wylosować zadaną liczbę zestawów hiperparametrów i tylko je sprawdzić - chociaż im więcej, tym lepsze wyniki powinniśmy dostać. Służy do tego `RandomizedSearchCV`. Co więcej, klasa ta potrafi próbkować rozkłady prawdopodobieństwa, a nie tylko sztywne listy wartości, co jest bardzo przydatne przy parametrach ciągłych.
+
+<br>Hiperparametry LightGBMa są dobrze opisane w oficjalnej dokumentacji: [wersja krótsza](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html#lightgbm.LGBMClassifier) i [wersja dłuższa](https://lightgbm.readthedocs.io/en/latest/Parameters.html). Jest ich dużo, więc nie będziemy ich tutaj omawiać. Jeżeli chodzi o ich dostrajanie w praktyce, to przydatny jest [oficjalny przewodnik](https://lightgbm.readthedocs.io/en/latest/Parameters-Tuning.html) oraz dyskusje na Kaggle.
+
+
+<br><br><b>Boosting - podsumowanie</b>
+<br>1. Model oparty o uczenie zespołowe.
+<br>2. Kolejne modele są dodawane sekwencyjnie i uczą się na błędach poprzedników.
+<br>3. Nauka typowo jest oparta o minimalizację funkcji kosztu (błędu), z użyciem spadku wzdłuż gradientu.
+<br>4. Wiodący model klasyfikacji dla danych tabelarycznych, z 2 głównymi implementacjami: XGBoost i LightGBM.
+<br>5. Liczne hiperparametry, wymagające odpowiednich metod dostrajania.
+
+
+<h3> Wyjaśnialna AI</h3>
+
+W ostatnich latach zaczęto zwracać coraz większą uwagę na wpływ sztucznej inteligencji na społeczeństwo, a na niektórych czołowych konferencjach ML nawet obowiązkowa jest sekcja "Social impact" w artykułach naukowych. Typowo im lepszy model, tym bardziej złożony, a najpopularniejsze modele boostingu są z natury skomplikowane. Kiedy mają podejmować krytyczne decyzje, to musimy wiedzieć, czemu predykcja jest taka, a nie inna. Jest to poddziedzina uczenia maszynowego - <b>wyjaśnialna AI (explainable AI, XAI)</b>.
+
+<br>Taka informacja jest cenna, bo dzięki temu lepiej wiemy, co robi model. Jest to ważne z kilku powodów:
+<br>1. Wymogi prawne - wdrażanie algorytmów w ekonomii, prawie etc. ma coraz częściej konkretne wymagania prawne co do wyjaśnialności predykcji.
+<br>2. Dodatkowa wiedza dla użytkowników - często dodatkowe obserwacje co do próbek są ciekawe same w sobie i dają wiedzę użytkownikowi (często posiadającemu specjalistyczną wiedzę z dziedziny), czasem nawet bardziej niż sam model predykcyjny.
+<br>3. Analiza modelu - dodatkowa wiedza o wewnętrznym działaniu algorytmu pozwala go lepiej zrozumieć i ulepszyć wyniki, np. przez lepszy preprocessing danych.
+
+<br>W szczególności można ją podzielić na <b>globalną</b> oraz <b>lokalną interpretowalność (global / local interpretability)</b>. Ta pierwsza próbuje wyjaśnić, czemu ogólnie model działa tak, jak działa. Analizuje strukturę modelu oraz trendy w jego predykcjach, aby podsumować w prostszy sposób jego tok myślenia. Interpretowalność lokalna z kolei dotyczy predykcji dla konkretnych próbek - czemu dla danego przykładu model podejmuje dla niego taką, a nie inną decyzję o klasyfikacji.
+
+<br>W szczególności podstawowym sposobem interpretowalności jest <b>ważność cech (feature importance)</b>. Wyznacza ona, jak ważne są poszczególne cechy:
+<br>- w wariancie globalnym, jak mocno model opiera się na poszczególnych cechach,
+<br>- w wariancie lokalnym, jak mocno konkretne wartości cech wpłynęły na predykcję, i w jaki sposób.
+
+<br>Teraz będzie nas interesować globalna ważność cech. Dla modeli drzewiastych definiuje się ją bardzo prosto. Każdy podział w drzewie decyzyjnym wykorzystuje jakąś cechę i redukuje z pomocą podziału funkcję kosztu (np. entropię) o określoną ilość. Dla drzewa decyzyjnego ważność to sumaryczna redukcja entropii, jaką udało się uzyskać za pomocą danej cechy. Dla lasów losowych i boostingu sumujemy te wartości dla wszystkich drzew. Alternatywnie można też użyć liczby splitów, w jakiej została użyta dana cecha, ale jest to mniej standardowe.
+
+<br>Warto zauważyć, że taka ważność cech jest <b>względna</b>:
+<br>- nie mówimy, jak bardzo ogólnie ważna jest jakaś cecha, tylko jak bardzo przydatna była dla naszego modelu w celu jego wytrenowania,
+<br>- ważność cech można tylko porównywać ze sobą, np. jedna jest 2 razy ważniejsza od drugiej; nie ma ogólnych progów ważności.
+
+<br>Ze względu na powyższe, ważności cech normalizuje się często do zakresu [0, 1] dla łatwiejszego porównywania.
+
+
+<br><br>Najpopularniejszym podejściem do interpretowalności lokalnych jest <b>SHAP (SHapley Additive exPlanations)</b>, metoda oparta o kooperatywną teorię gier. Traktuje się cechy modelu jak zbiór graczy, podzielonych na dwie drużyny (koalicje): jedna chce zaklasyfikować próbkę jako negatywną, a druga jako pozytywną. O ostatecznej decyzji decyduje model, który wykorzystuje te wartości cech. Powstaje pytanie - w jakim stopniu wartości cech przyczyniły się do wyniku swojej drużyny? Można to obliczyć jako wartości Shapleya (Shapley values), które dla modeli ML oblicza algorytm SHAP. Ma on bardzo znaczące, udowodnione matematycznie zalety, a dodatkowo posiada wyjątkowo efektywną implementację dla modeli drzewiastych oraz dobre wizualizacje.
+
+<br>Bardzo intuicyjnie, na prostym przykładzie, SHAPa wyjaśnia [pierwsza część tego artykułu](https://iancovert.com/blog/understanding-shap-sage/). Dobrze i dość szczegółówo SHAPa wyjaśnia jego autor [w tym filmie](https://www.youtube.com/watch?v=-taOhqkiuIo).
+
+<b>Wyjaśnialna AI - podsumowanie</b>
+
+<br>1. Problem zrozumienia, jak wnioskuje model i czemu podejmuje określone decyzje.
+<br>2. Ważne zarówno z perspektywy badaczy danych, jak i użytkowników systemu.
+<br>3. Można wyjaśniać model lokalnie (konkretne predykcje) lub globalnie (wpływ poszczególnych cech).
+
+
+<br>Dokonaj selekcji cech, usuwając 20% najsłabszych cech. Może się tu przydać klasa `SelectPercentile`. Czy Random Forest i LightGBM (bez dostrajania hiperparametrów, dla uproszczenia) wytrenowane bez najsłabszych cech dają lepszy wynik (AUROC lub innej metryki)?
+
+Wykorzystaj po 1 algorytmie z 3 grup algorytmów selekcji cech:
+1. Filter methods - mierzymy ważność każdej cechy niezależnie, za pomocą pewnej miary (typowo ze statystyki lub teorii informacji), a potem odrzucamy (filtrujemy) te o najniższej ważności. Są to np. `chi2` i `mutual_info_classif` z pakietu `sklearn.feature_selection`.
+2. Embedded methods - klasyfikator sam zwraca ważność cech, jest jego wbudowaną cechą (stąd nazwa). Jest to w szczególności właściwość wszystkich zespołowych klasyfikatorów drzewiastych. Mają po wytrenowaniu atrybut `feature_importances_`.
+2. Wrapper methods - algorytmy wykorzystujące w środku używany model (stąd nazwa), mierzące ważność cech za pomocą ich wpływu na jakość klasyfikatora. Jest to np. recursive feature elimination (klasa `RFE`). W tym algorytmie trenujemy klasyfikator na wszystkich cechach, wyrzucamy najsłabszą, trenujemy znowu i tak dalej.
+
+Typowo metody filter są najszybsze, ale dają najsłabszy wynik, natomiast metody wrapper są najwolniejsze i dają najlepszy wynik. Metody embedded są gdzieś pośrodku.
+
+Dla zainteresowanych, inne znane i bardzo dobre algorytmy:
+- Relief (filter method) oraz warianty, szczególnie ReliefF, SURF i MultiSURF (biblioteka `ReBATE`): [Wikipedia](https://en.wikipedia.org/wiki/Relief_(feature_selection)), [artykuł "Benchmarking Relief-Based Feature Selection Methods"](https://www.researchgate.net/publication/321307194_Benchmarking_Relief-Based_Feature_Selection_Methods)
+- Boruta (wrapper method), stworzony na Uniwersytecie Warszawskim, łączący Random Forest oraz testy statystyczne (biblioteka `boruta_py`): [link 1](https://towardsdatascience.com/boruta-explained-the-way-i-wish-someone-explained-it-to-me-4489d70e154a), [link 2](https://danielhomola.com/feature%20selection/phd/borutapy-an-all-relevant-feature-selection-method/)
+</div>
+
+<div class="one__to_control_all" id="sieci_neuronowe" >
+    <h2> Sztuczne Sieci Neuronowe SSN - Artificial Neural Network ANN</h2>
+
+<h3> Historia</h3>
+
+* 1943 - Progowa Jednostka Logiczna - TLU (ang. Threshold Logic Unit) [McCulloch and Pitts]
+  - Pierwszy sztuczny neuron został opracowany w 1943 roku przez McCullocha i Pittsa. Nazywany jest również układem TLU (Progowa      Jednostka Logiczna, ang. Threshold Logic Unit). Jest on uważany za prototyp perceptronu.
+  - wejściami są stany binarne (nie liczby)
+
+* 1957 - Perceptron [Frank Rosenblat]
+  - Perceptron został opracowany w 1957 roku przez Franka Rosenblata w Cornell Aeronautical Laboratory na zlecenie Marynarki Wojennej USA.
+  - Jest to zmodyfikowany TLU, gdzie wejściami są liczby (a nie stany binarne jak w TLU), a kązde połączenie ma przyporządkowaną wagę
+  - perceptron składa się z jednej lub większej liczby TLU zorganizowanych w pojedyńczą warstwę (tylko 1 warstwa!) (warstwę gęstą, bo każda jednostka ma na wejściu wszystkie cechy wejściowe), gdzie warstwą wejściową nazywamy wektor cech, a wyjściową jednostki TLU generujące dane wyjściowe 
+  - <b>funkcj skokowa</b> (aktywacji) perceptronu - funkcja skokowa Heaviside'a nie miała płynnego przejścia- albo 1 albo 0
+  - nie mógł rozwiązać problemu alternatywy rozłącznej - XOR
+
+* perceptron jednowarstwowy
+  - sieć jednokierunkowa jednowarstwowa - jedna warstwa neuronów zasilnaych jedynie z wejść, warstwa gęsta bo połączenie jest pełne - każde wejście jest połączone z kązdym neuronem, przepływ sygnałów wstępuje w jednym kierunku od wejścia do wyjścia, *węzły wejściowe nie tworzą warstwy neuronów bo nie zachodzi w nich żaden proces obliczeniowy*
+  ![](assets/perceptron_jednowarstwowy.jpg)
+
+* perceptron wielowarstwowy - MLP (Multi Layer Perceptron) -
+  - wiele warstw perceptronów mogły już rozwiązać problem alternatywy rozłącznej - XOR
+  - tutaj pojawił się problem z uczeniem warst ukrytych, bo zwykłe obliczanie gradientu prostego jest możliwe w odniesieniu do parametrów
+  ![](assets/jednokierunkowa_wielowarstwowa.jpg)
+
+* wsteczna propagacja błędu (backpropagation) 
+  - 1970 odwrotne różniczowanie automatyczne (reverse-mode automatic differentiation) - w sumie to była już propagacja wsteczna 
+  - 1985 Rumelhart i inni - zmienili funkcję <b>skokową</b> w MLP na funkcję <b>sigmoidalną</b> 
+    - bo funkcja skokowa jest nieróżniczkowalna, czyli ma w każdym punkcie pochodną równą 0 przez co nie pozwalała korzystać z gradientu
+    - natomiast funkcja sigmoidalna ma w każdym punkcie pochodną niezerową, dzięki czemu algorytm gradientu prostego może na każdym etapie uzyskiwać lepsze wyniki 
+![](assets/rozniczkowalnosc.jpg)
+    - w rzeczywistości algorytm propagacji wstecznej współpracuje dobrze z innymi funkcjami aktwacji które są różniczkowalne:
+      - tangensa hiperbolicznego - tanh
+      - ReLU - RectifiedLinear Unit - prostowana jednostka linowa
+  - Dizłanie algorytmu wstecznej propagacji błędu:
+    - za każdym razem przetwarzana jest jedna minigrupa danych (np 32 przykłady), każdy przebieg nazywany jest epoką (epoch)
+    - 1. przebieg w przód (forward pass) - obliczane są wyniki pośrednie dla każdego neuronu w sieci
+    - 2. mierzymy błąd na wyjściu sieci - wykorzystujemy funkcję straty do uzyskania różnicy (błędu) między oczekiwanym a uzyskanym wynikiem
+    - 3. przebieg w tył (back pass) - cofamy się sprawdzając wkład każdego wyniku neuronu w uzyskany błąd za pomocą reguły łańcuchowej aż do warstwy wejściowej, mierzony jest tu gradient błędu we wszystkich wagach połączeń 
+    - 4. na koniec modyfikacja wag i obciążeń połączeń sieci w celu zredukowania błędu (gradiencik prosty)
+
+
+
+<h3> Pojęcia</h3>
+- <b>warstwa gęsta</b> - dense layer - warstwa w pełni połączona, czyli wszystkie neurony poprzedniej warstwy są połączone z neuronami następnej warstwy, lub wszystkie neurony są połączone ze wszystkimi wejściami cech
+- <b>warstwa wejściowa</b> - input layer - sygnały wejściowe (wektor cech) - nazywana też warstwą neuronów ale tak naprawdę to nie są neurony bo nie mają funkcji aktywacji, są to po prostu cechy 
+- <b>warstwa wyjściowa</b> - output layer - neurony generujące dane wyjściowe z modelu
+- <b>reguła Hebba</b> - w 1949 r Hebb mówił że  połączenie między dwoma neuronami staje się silniejsze im częściej się pobudzają (komunikują)
+- <b>uczenie transferowe (transfer learning)</b> - wykorzystanie dolnych warstw już nauczonej sieci i dotrenowanie górnych warstw do specyficznych danych np. w zdjęciach dolne warstwy mogą rozpoznawać twarze na zdjęciu, ale chcemy douczyć do konkretnych twarzy
+
+<h2> Problem zanikających i ekspoldujących gradientów {str349}</h2>
+* `zanikające gradienty (vanishing gradients)` - wartości gradientów maleją wraz z przebiegiem propagacji wstecznej do niższych warst sieci, przez co aktualizacja wag nie powoduje zmiany wag w połączeniach 
+* `eksplodujące gradienty (expolding gradients)` - wartości gradientów stale rosną wraz z przebiegiem propagacji wstecznej do niższych warst sieci, przez co aktualizacja wag powoduje prawie losową zmianę wag w połączeniach 
+- przez zjawisko `niestablinych gradientów` sieci były porzucone na początku XXI wieku, dopiero wyjaśniono to w 2010 roku w artykule Xaviera Glorota i Yoshua Bengio - odkryli że za tym stoi 1. zła początkowa inicjalizacja wag oraz 2. zła funkcja aktywacji
+  - 1. <b>inicjalizacje wag</b> - wagi połączeń w każdej warstwie muszą być losowo inicjalizowane (Inicjalizacja Glorota lub Xaviera)
+    - inicjalizacja <b>Glorota</b> dla sigmoidalnej, tan, softmax, brak
+    - inicjalizacja <b>He / Kaiming</b> dla ReLU, przeciakającego ReLU, ELU, GELU, Swish, Mish
+    - inicjalizacja <b>LeCuna</b> dla SELU
+    - domyślnie Keras wyorzystuje inicjalizację Glorota z rozkładem jednostajnym
+  - 2. <b>lepsze funkcje aktywacji</b> - wcześniej uważano że skoro w biologicznych neuronach działa funkcja sigmoidalna, to i w sztucznych sieciach też używali, ale był problem z nasyceniem funkcji sigmoidalnej w okolicach 0 i 1 no i ma średnią w 0.5, okazuje się że funkcja <b>ReLU</b> jest lepsza, bo nie ulega ona nasyceniu dla wartości dodatnich i jest szybsza obliczeniowo
+  
+<h2> Funkcje aktywacji {351}</h2>
+* `ReLU (rectified linear unit) - prostowana jednostka liniowa` - nie jest idealna bo znany jest problem śmierci ReLU (dying ReLU) - w czasie uczenia niektóre neurony trwale giną, czyli przesyłają tylko 0 najczęściej gdy na wejściu dostaje wartości ujemne i gradient już na niego nie wpływa bo pochodna ReLu przy ujemnych wartościach wynosi 0
+  * Funkcje niegładkie - ich pochodne zmieniają się gwałtownie w punkcie z=0, powoduje to że algorytm gradientu prostego przeskakuje w okolicach optimum
+    - `przeciekająca funkcja ReLU (Leaky ReLU)` - zawiera niewielkie nachylenie dla wartości ujemnych, przez co neurony nie giną
+    - `parametryczna przeciekająca funkcja ReLU (Parametric Leaky ReLU - PReLU)` - ma parametr który jest modyfikowany w trakcjie uczenia
+  * Funkcje gładkie - pochodne zmieniają się gładko - są to gładkie warianty ReLU:
+    - `jednostka wykładniczo liniowa ELU (exponential liner unit)` - dla z < 0: alfa(exp(z)-1) dla z>0: z
+    - `skalowana ELU (scaled ELU) - SELU` - to samo co ELU ale dla alfa=1,65
+    - `gausowska jednostka liniowa GELU (Gaussian Error Linear Unit)` - gausowaki rozkład
+    - `sigmoidalna jednostka liniowa  - Swish` - z sigma(beta z)
+    - `też sigmoidalna jednostka liniowa  - Mish` - log( 1 + exp(z)) - najnowsza i chyba najlepsza ale wymagająca obliczeniowo
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/Activation_Functions.png" alt=""> 
+</div>
+
+
+<h2> Dostrajanie hiperparametrów w sieci neuronowej {str341}</h2>
+- `Liczba warstw ukrytych` - w przypadku wielu problemów wystarczą 1 lub 2 warstwy ukryte, im więcej będziemy dokładali warstw tym bardziej sieć się przetrenuje, czyli uczy na pamięć, ale do dużych problemów stosuje się i 10 warstw ale wtedy już korzysta się ze sprawdzonych architektur i tylko dotrenowuje się na swoim małym zbiorze danych 
+- `Liczba neuronów w warstwach` - kiedyś stosowano piramidę, czyli stopniowo zmniejszano liczbę neuronów, ale to prowadzi do utraty informacji, bo warstwa z 2 neuronami może dać sygnał tylko dwuwymiarowy, więc jeśli otrzyma na wejściu dane trójwymiarowe to część informacji będie utracona
+- `współczynnik uczenia` - optymalny współczynnik uczenia podobno stanowi połowę maksymalnego współczynnika uczenia (wartość gdy algorytm staje się rozbieżny z rozwiązaniem), jednym ze sposobów na określenie najlepszego jest uczenie modelu i stopniowe zwiększanie współczynnika np. od 10e-5 do 10, mnożąc współczynnik o stały czynnik w każdej następnej iteracji {str343}, robimy wykres funkcji straty od współczynnika i tuż przed tym gdzie strata zaczyna rosnąć tam jest nasz optymalny współczynnik
+- `rozmiar grupy danych (batch size)` - niby od 2 do 32 bo szybciej się uczy wtedy ale duże też są dobre tylko trzeba używać techniki rozgrzewania współczynnika uczenia, czyli zaczynamy z małym i stopniowo go zwiększamy
+
+<h2> Normalizacja wsadowa (batch normalization)</h2>
+- publikacja z 2015, BN polega na wstawianu operacji przed każdą funkcją aktywacji w każdej warstwie, dane wejściowe w tej operacji są wśrodkowane i znormalizowane - pomaga to modelowi określić optymalną skalę iśrednią danych wejściowych dla <b>każdej warstwy</b> czyli nawet w najwyższych warstwach
+
+<h2> Rodzaje sieci (książka GERON):</h2>
+<h3> Perceptron wielowarstwowy :</h3>
+  - *Modele klasyczne* (klasyfikujący i regresyjny) - sekwencyjne, czyli wszystkie dane muszą przechodzić przez wszystkie warstwy sieci, zatem proste wzorce mogą zostać zasłonięte przez sekwencję przekształceń 
+  - *Modele złożone* - 
+    - 1. Niesekwencyjne sieci: <b>Wide&Deep</b> {str324} - niektóre wejścia zostają połączone bezpośrednio z warstwą wyjściową, ma 2 ścieżki: głęboką i krótką, może poznawać wzorce głębokie przez ścieżkę głęboką (czyli normalna głęboka sieć) i proste reguły przez ścieżkę krótką
+
+
+
+
+
+
+
+Wszystko zaczęło się od inspirowanych biologią [sztucznych neuronów](https://en.wikipedia.org/wiki/Artificial_neuron), których próbowano użyć do symulacji mózgu. Naukowcy szybko odeszli od tego podejścia (sam problem modelowania okazał się też znacznie trudniejszy, niż sądzono), zamiast tego używając neuronów jako jednostek reprezentującą dowolną funkcję parametryczną $f(x, \Theta)$. Każdy neuron jest zatem bardzo elastyczny, bo jedyne wymagania to funkcja różniczkowalna, a mamy do tego wektor parametrów $\Theta$.
+
+W praktyce najczęściej można spotkać się z kilkoma rodzinami sieci neuronowych:
+1. <b>Perceptrony wielowarstwowe (*MultiLayer Perceptron*, MLP)</b> - najbardziej podobne do powyższego opisu, niezbędne do klasyfikacji i regresji
+2. <b>Konwolucyjne (*Convolutional Neural Networks*, CNNs)</b> - do przetwarzania danych z zależnościami przestrzennymi, np. obrazów czy dźwięku
+3. <b>Rekurencyjne (*Recurrent Neural Networks*, RNNs)</b> - do przetwarzania danych z zależnościami sekwencyjnymi, np. szeregi czasowe, oraz kiedyś do języka naturalnego
+4. <b>Transformacyjne (*Transformers*)</b>, oparte o mechanizm atencji (*attention*) - do przetwarzania języka naturalnego (NLP), z którego wyparły RNNs, a coraz częściej także do wszelkich innych danych, np. obrazów, dźwięku
+5. <b>Grafowe (*Graph Neural Networks*, GNNS)</b> - do przetwarzania grafów
+
+Na tym laboratorium skupimy się na najprostszej architekturze, czyli MLP. Jest ona powszechnie łączona z wszelkimi innymi architekturami, bo pozwala dokonywać klasyfikacji i regresji. Przykładowo, klasyfikacja obrazów to zwykle CNN + MLP, klasyfikacja tekstów to transformer + MLP, a regresja na grafach to GNN + MLP.
+
+Dodatkowo, pomimo prostoty MLP są bardzo potężne - udowodniono, że perceptrony (ich powszechna nazwa) są [uniwersalnym aproksymatorem](https://www.sciencedirect.com/science/article/abs/pii/0893608089900208), będącym w stanie przybliżyć dowolną funkcję z odpowiednio małym błędem, zakładając wystarczającą wielkość warstw sieci. Szczególne ich wersje potrafią nawet [reprezentować drzewa decyzyjne](https://www.youtube.com/watch?v=_okxGdHM5b8).
+
+Dla zainteresowanych polecamy [doskonałą książkę "Dive into Deep Learning", z implementacjami w PyTorchu](https://d2l.ai/chapter_multilayer-perceptrons/index.html), [klasyczną książkę "Deep Learning Book"](https://www.deeplearningbook.org/contents/mlp.html), oraz [ten filmik](https://www.youtube.com/watch?v=BFHrIxKcLjA), jeśli zastanawiałeś/-aś się, czemu używamy deep learning, a nie naprzykład (wide?) learning. (aka. czemu staramy się budować głębokie sieci, a nie płytkie za to szerokie)
+
+<h3> Funkcje aktywacji</h3>
+
+Funkcje aktywacji są sercem sztucznych neuronów w sieci neuronowej. Te kluczowe elementy wprowadzają nieliniowość do modelu, przekształcając ważone wejścia, aby wygenerować wynik. Prosto mówiąc, funkcja aktywacji decyduje, jak dużo sygnału przekazać do następnej warstwy na podstawie otrzymanego wejścia. Ideą łączenia wielu ważonych sygnałów jest to, co pozwala sieciom neuronowym uczyć się bardzo złożonych zależności.
+
+Nieliniowy charakter tych funkcji jest kluczowy, aby sieci neuronowe mogły uczyć się na podstawie skomplikowanych danych. Gdybyśmy używali tylko liniowych funkcji aktywacji, bez względu na to, ile warstw byśmy dodali, sieć zachowywałaby się jak pojedynczy perceptron, ponieważ kompozycja funkcji liniowych wciąż jest funkcją liniową. Ogranicza to złożoność zadań, które sieć może rozwiązywać. Nieliniowe funkcje aktywacji, z drugiej strony, umożliwiają sieci uczenie się złożonych wzorców i rozwiązywanie trudnych problemów, dodając warstwy abstrakcji.
+
+Istnieje szeroka gama funkcji aktywacji wykorzystywanych w sieciach neuronowych, z których każda ma swoje unikalne zalety i zastosowania. Oto cztery popularne funkcje aktywacji:
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/activation_fun.png" alt=""> 
+</div>
+
+<h3> Sieci MLP</h3>
+
+Dla przypomnienia, na wejściu mamy punkty ze zbioru treningowego, czyli $d$-wymiarowe wektory. W klasyfikacji chcemy znaleźć granicę decyzyjną, czyli krzywą, która oddzieli od siebie klasy. W wejściowej przestrzeni może być to trudne, bo chmury punktów z poszczególnych klas mogą być ze sobą dość pomieszane. Pamiętajmy też, że regresja logistyczna jest klasyfikatorem liniowym, czyli w danej przestrzeni potrafi oddzielić punkty tylko linią prostą.
+
+Sieć MLP składa się z warstw. Każda z nich dokonuje nieliniowego przekształcenia przestrzeni (można o tym myśleć jak o składaniu przestrzeni jakąś prostą/łamaną), tak, aby w finalnej przestrzeni nasze punkty były możliwie liniowo separowalne. Wtedy ostatnia warstwa z sigmoidą będzie potrafiła je rozdzielić od siebie.
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/dimensions_change.png" alt=""> 
+</div>
+
+Poszczególne neurony składają się z iloczynu skalarnego wejść z wagami neuronu, oraz nieliniowej funkcji aktywacji. W PyTorchu są to osobne obiekty - `nn.Linear` oraz np. `nn.Sigmoid`. Funkcja aktywacji przyjmuje wynik iloczynu skalarnego i przekształca go, aby sprawdzić, jak mocno reaguje neuron na dane wejście. Musi być nieliniowa z dwóch powodów. Po pierwsze, tylko nieliniowe przekształcenia są na tyle potężne, żeby umożliwić liniową separację danych w ostatniej warstwie. Po drugie, liniowe przekształcenia zwyczajnie nie działają. Aby zrozumieć czemu, trzeba zobaczyć, co matematycznie oznacza sieć MLP.
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/Perceptron.png" alt=""> 
+</div>
+
+Zapisane matematycznie MLP to:
+
+$h_1 = f_1(x) \\
+h_2 = f_2(h_1) \\
+h_3 = f_3(h_2) \\
+... \\
+h_n = f_n(h_{n-1})$
+
+gdzie $x$ to wejście $f_i$ to funkcja aktywacji $i$-tej warstwy, a $h_i$ to wyjście $i$-tej warstwy, nazywane <b>ukrytą reprezentacją (hidden representation)</b>, lub *latent representation*. Nazwa bierze się z tego, że w środku sieci wyciągamy cechy i wzorce w danych, które nie są widoczne na pierwszy rzut oka na wejściu.
+
+Załóżmy, że uczymy się na danych $x$ o jednym wymiarze (dla uproszczenia wzorów) oraz nie mamy funkcji aktywacji, czyli wykorzystujemy tak naprawdę aktywację liniową $f(x) = x$. Zobaczmy jak będą wyglądać dane przechodząc przez kolejne warstwy:
+
+$h_1 = f_1(xw_1) = xw_1 \\
+h_2 = f_2(h_1w_2) = xw_1w_2 \\
+... \\
+h_n = f_n(h_{n-1}w_n) = xw_1w_2...w_n$
+
+gdzie $w_i$ to jest parametr $i$-tej warstwy sieci, $x$ to są dane (w naszym przypadku jedna liczba) wejściowa, a $h_i$ to wyjście $i$-tej warstwy.
+
+Jak widać, taka sieć o $n$ warstwach jest równoważna sieci o jednej warstwie z parametrem $w = w_1w_2...w_n$. Wynika to z tego, że złożenie funkcji liniowych jest także funkcją liniową - patrz notatki z algebry :)
+
+Jeżeli natomiast użyjemy nieliniowej funkcji aktywacji, często oznaczanej jako $\sigma$, to wszystko będzie działać. Co ważne, ostatnia warstwa, dająca wyjście sieci, ma zwykle inną aktywację od warstw wewnątrz sieci, bo też ma inne zadanie - zwrócić wartość dla klasyfikacji lub regresji. Na wyjściu korzysta się z funkcji liniowej (regresja), sigmoidalnej (klasyfikacja binarna) lub softmax (klasyfikacja wieloklasowa).
+
+Wewnątrz sieci używano kiedyś sigmoidy oraz tangensa hiperbolicznego `tanh`, ale okazało się to nieefektywne przy uczeniu głębokich sieci o wielu warstwach. Nowoczesne sieci korzystają zwykle z funkcji ReLU (*rectified linear unit*), która jest zaskakująco prosta: $ReLU(x) = \max(0, x)$. Okazało się, że bardzo dobrze nadaje się do treningu nawet bardzo głębokich sieci neuronowych. Nowsze funkcje aktywacji są głównie modyfikacjami ReLU.
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/relu.png" alt=""> 
+</div>
+
+<h3> Wprowadzenie do PyTorcha</h3>
+PyTorch to w gruncie rzeczy narzędzie do algebry liniowej z [automatycznym rożniczkowaniem](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html), z możliwością przyspieszenia obliczeń z pomocą GPU. Na tych fundamentach zbudowany jest pełny framework do uczenia głębokiego. Można spotkać się ze stwierdzenie, że PyTorch to NumPy + GPU + opcjonalne różniczkowanie, co jest całkiem celne. Plus można łatwo debugować printem :)
+
+PyTorch używa dynamicznego grafu obliczeń, który sami definiujemy w kodzie. Takie podejście jest bardzo wygodne, elastyczne i pozwala na łatwe eksperymentowanie. Odbywa się to potencjalnie kosztem wydajności, ponieważ pozostawia kwestię optymalizacji programiście. Więcej na ten temat dla zainteresowanych na końcu laboratorium.
+
+Samo API PyTorcha bardzo przypomina Numpy'a, a podstawowym obiektem jest `Tensor`, klasa reprezentująca tensory dowolnego wymiaru. Dodatkowo niektóre tensory będą miały automatycznie obliczony gradient. Co ważne, tensor jest na pewnym urządzeniu, CPU lub GPU, a przenosić między nimi trzeba explicite.
+
+Najważniejsze moduły:
+- `torch` - podstawowe klasy oraz funkcje, np. `Tensor`, `from_numpy()`
+- `torch.nn` - klasy związane z sieciami neuronowymi, np. `Linear`, `Sigmoid`
+- `torch.optim` - wszystko związane z optymalizacją, głównie spadkiem wzdłuż gradientu
+
+
+<h3> MLP w PyTorchu</h3>
+
+Warstwę neuronów w MLP nazywa się warstwą gęstą (*dense layer*) lub warstwą w pełni połączoną (*fully-connected layer*), i taki opis oznacza zwykle same neurony oraz funkcję aktywacji. PyTorch, jak już widzieliśmy, definiuje osobno transformację liniową oraz aktywację, a więc jedna warstwa składa się de facto z 2 obiektów, wywoływanych jeden po drugim. Inne frameworki, szczególnie wysokopoziomowe (np. Keras) łączą to często w jeden obiekt.
+
+MLP składa się zatem z sekwencji obiektów, które potem wywołuje się jeden po drugim, gdzie wyjście poprzedniego to wejście kolejnego. Ale nie można tutaj używać Pythonowych list! Z perspektywy PyTorcha to wtedy niezależne obiekty i nie zostanie wtedy przekazany między nimi gradient. Trzeba tutaj skorzystać z `nn.Sequential`, aby tworzyć taki pipeline.
+
+Rozmiary wejścia i wyjścia dla każdej warstwy trzeba w PyTorchu podawać explicite. Jest to po pierwsze edukacyjne, a po drugie często ułatwia wnioskowanie o działaniu sieci oraz jej debugowanie - mamy jasno podane, czego oczekujemy. Niektóre frameworki (np. Keras) obliczają to automatycznie.
+
+Co ważne, ostatnia warstwa zwykle nie ma funkcji aktywacji. Wynika to z tego, że obliczanie wielu funkcji kosztu (np. entropii krzyżowej) na aktywacjach jest często niestabilne numerycznie. Z tego powodu PyTorch oferuje funkcje kosztu zawierające w środku aktywację dla ostatniej warstwy, a ich implementacje są stabilne numerycznie. Przykładowo, `nn.BCELoss` przyjmuje wejście z zaaplikowanymi już aktywacjami, ale może skutkować under/overflow, natomiast `nn.BCEWithLogitsLoss` przyjmuje wejście bez aktywacji, a w środku ma specjalną implementację łączącą binarną entropię krzyżową z aktywacją sigmoidalną. Oczywiście w związku z tym aby dokonać potem predykcji w praktyce, trzeba pamiętać o użyciu funkcji aktywacji. Często korzysta się przy tym z funkcji z modułu `torch.nn.functional`, które są w tym wypadku nieco wygodniejsze od klas wywoływalnych z `torch.nn`.
+
+Całe sieci w PyTorchu tworzy się jako klasy dziedziczące po `nn.Module`. Co ważne, obiekty, z których tworzymy sieć, np. `nn.Linear`, także dziedziczą po tej klasie. Pozwala to na bardzo modułową budowę kodu, zgodną z zasadami OOP. W konstruktorze najpierw trzeba zawsze wywołać konstruktor rodzica - `super().__init__()`, a później tworzy się potrzebne obiekty i zapisuje jako atrybuty. Każdy atrybut dziedziczący po `nn.Module` lub `nn.Parameter` jest uważany za taki, który zawiera parametry sieci, a więc przy wywołaniu metody `parameters()` - parametry z tych atrybutów pojawią się w liście wszystkich parametrów. Musimy też zdefiniować metodę `forward()`, która przyjmuje tensor `x` i zwraca wynik. Typowo ta metoda po prostu używa obiektów zdefiniowanych w konstruktorze.
+
+
+<b>UWAGA: nigdy w normalnych warunkach się nie woła metody `forward` ręcznie</b>
+
+Sieci neuronowe bardzo łatwo przeuczają, bo są bardzo elastycznymi i pojemnymi modelami. Dlatego mają wiele różnych rodzajów regularyzacji, których używa się razem. Co ciekawe, udowodniono eksperymentalnie, że zbyt duże sieci z mocną regularyzacją działają lepiej niż mniejsze sieci, odpowiedniego rozmiaru, za to ze słabszą regularyzacją.
+
+Pierwszy rodzaj regularyzacji to znana nam już <b>regularyzacja L2</b>, czyli penalizacja zbyt dużych wag. W kontekście sieci neuronowych nazywa się też ją czasem *weight decay*. W PyTorchu dodaje się ją jako argument do optymalizatora.
+
+<h3> Regularyzacja specyficzna dla sieci neuronowych</h3>
+ to <b>dropout</b>. Polega on na losowym wyłączaniu zadanego procenta neuronów podczas treningu. Pomimo prostoty okazała się niesamowicie skuteczna, szczególnie w treningu bardzo głębokich sieci. Co ważne, jest to mechanizm używany tylko podczas treningu - w trakcie predykcji za pomocą sieci wyłącza się ten mechanizm i dokonuje normalnie predykcji całą siecią. Podejście to można potraktować jak ensemble learning, podobny do lasów losowych - wyłączając losowe części sieci, w każdej iteracji trenujemy nieco inną sieć, co odpowiada uśrednianiu predykcji różnych algorytmów. Typowo stosuje się dość mocny dropout, rzędu 25-50%. W PyTorchu implementuje go warstwa `nn.Dropout`, aplikowana zazwyczaj po funkcji aktywacji.
+
+Ostatni, a być może najważniejszy rodzaj regularyzacji to <b>wczesny stop (early stopping)</b>. W każdym kroku mocniej dostosowujemy terenową sieć do zbioru treningowego, a więc zbyt długi trening będzie skutkował przeuczeniem. W metodzie wczesnego stopu używamy wydzielonego zbioru walidacyjnego (pojedynczego, metoda holdout), sprawdzając co określoną liczbę epok wynik na tym zbiorze. Jeżeli nie uzyskamy wyniku lepszego od najlepszego dotychczas uzyskanego przez określoną liczbę epok, to przerywamy trening. Okres, przez który czekamy na uzyskanie lepszego wyniku, to cierpliwość (*patience*). Im mniejsze, tym mocniejszy jest ten rodzaj regularyzacji, ale trzeba z tym uważać, bo łatwo jest przesadzić i zbyt szybko przerywać trening. Niektóre implementacje uwzględniają tzw. *grace period*, czyli gwarantowaną minimalną liczbę epok, przez którą będziemy trenować sieć, niezależnie od wybranej cierpliwości.
+
+Dodatkowo ryzyko przeuczenia można zmniejszyć, używając mniejszej stałej uczącej.
+
+Opisaliśmy wcześniej podstawowy optymalizator w sieciach neuronowych - spadek wzdłuż gradientu. Jednak wymaga on użycia całego zbioru danych, aby obliczyć gradient, co jest często niewykonalne przez rozmiar zbioru. Dlatego wymyślono <b>stochastyczny spadek wzdłuż gradientu (stochastic gradient descent, SGD)</b>, w którym używamy 1 przykładu naraz, liczymy gradient tylko po nim i aktualizujemy parametry. Jest to oczywiście dość grube przybliżenie gradientu, ale pozwala robić szybko dużo małych kroków. Kompromisem, którego używa się w praktyce, jest <b>minibatch gradient descent</b>, czyli używanie batchy np. 32, 64 czy 128 przykładów.
+
+Rzadko wspominanym, a ważnym faktem jest także to, że stochastyczność metody optymalizacji jest sama w sobie też [metodą regularyzacji](https://arxiv.org/abs/2101.12176), a więc `batch_size` to także hiperparametr.
+
+Obecnie najpopularniejszą odmianą SGD jest [Adam](https://arxiv.org/abs/1412.6980), gdyż uczy on szybko sieć oraz daje bardzo dobre wyniki nawet przy niekoniecznie idealnie dobranych hiperparametrach. W PyTorchu najlepiej korzystać z jego implementacji `AdamW`, która jest nieco lepsza niż implementacja `Adam`. Jest to zasadniczo zawsze wybór domyślny przy treningu współczesnych sieci neuronowych.
+
+Na razie użyjemy jednak minibatch SGD.
+
+Na koniec laboratorium dołożymy do naszego modelu jeszcze 3 powrzechnie używane techniki, które są bardzo proste, a pozwalają często ulepszyć wynik modelu.
+
+Pierwszą z nich są <b>warstwy normalizacji (normalization layers)</b>. Powstały one początkowo z założeniem, że przez przekształcenia przestrzeni dokonywane przez sieć zmienia się rozkład prawdopodobieństw pomiędzy warstwami, czyli tzw. *internal covariate shift*. Później okazało się, że zastosowanie takiej normalizacji wygładza powierzchnię funkcji kosztu, co ułatwia i przyspiesza optymalizację. Najpowszechniej używaną normalizacją jest <b>batch normalization (batch norm)</b>.
+
+Drugim ulepszeniem jest dodanie <b>wag klas (class weights)</b>. Mamy do czynienia z problemem klasyfikacji niezbalansowanej, więc klasa mniejszościowa, ważniejsza dla nas, powinna dostać większą wagę. Implementuje się to trywialnie prosto - po prostu mnożymy wartość funkcji kosztu dla danego przykładu przez wagę dla prawdziwej klasy tego przykładu. Praktycznie każdy klasyfikator operujący na jakiejś ważonej funkcji może działać w ten sposób, nie tylko sieci neuronowe.
+
+Ostatnim ulepszeniem jest zamiana SGD na optymalizator Adam, a konkretnie na optymalizator `AdamW`. Jest to przykład <b>optymalizatora adaptacyjnego (adaptive optimizer)</b>, który potrafi zaadaptować stałą uczącą dla każdego parametru z osobna w trakcie treningu. Wykorzystuje do tego gradienty - w uproszczeniu, im większa wariancja gradientu, tym mniejsze kroki w tym kierunku robimy.
+
+
+Jak widzieliśmy, sieci neuronowe mają bardzo dużo hiperparametrów. Przeszukiwanie ich grid search'em jest więc niewykonalne, a chociaż random search by działał, to potrzebowałby wielu iteracji, co też jest kosztowne obliczeniowo.
+
+Zaimplementuj inteligentne przeszukiwanie przestrzeni hiperparametrów za pomocą biblioteki [Optuna](https://optuna.org/). Implementuje ona między innymi algorytm Tree Parzen Estimator (TPE), należący do grupy algorytmów typu Bayesian search. Typowo osiągają one bardzo dobre wyniki, a właściwie zawsze lepsze od przeszukiwania losowego. Do tego wystarcza im często niewielka liczba kroków.
+
+Zaimplementuj 3-warstwową sieć MLP, gdzie pierwsza warstwa ma rozmiar ukryty N, a druga N // 2. Ucz ją optymalizatorem Adam przez maksymalnie 300 epok z cierpliwością 10.
+
+Przeszukaj wybrane zakresy dla hiperparametrów:
+- rozmiar warstw ukrytych (N)
+- stała ucząca
+- batch size
+- siła regularyzacji L2
+- prawdopodobieństwo dropoutu
+
+Wykorzystaj przynajmniej 30 iteracji. Następnie przełącz algorytm na losowy (Optuna także jego implementuje), wykonaj 30 iteracji i porównaj jakość wyników.
+
+Przydatne materiały:
+- [Optuna code examples - PyTorch](https://optuna.org/#code_examples)
+- [Auto-Tuning Hyperparameters with Optuna and PyTorch](https://www.youtube.com/watch?v=P6NwZVl8ttc)
+- [Hyperparameter Tuning of Neural Networks with Optuna and PyTorch](https://towardsdatascience.com/hyperparameter-tuning-of-neural-networks-with-optuna-and-pytorch-22e179efc837)
+- [Using Optuna to Optimize PyTorch Hyperparameters](https://medium.com/pytorch/using-optuna-to-optimize-pytorch-hyperparameters-990607385e36)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3> Laby</h3>
+
+Celem laboratorium jest zapoznanie się z podstawami sieci neuronowych oraz uczeniem głębokim (*deep learning*). Zapoznasz się na nim z następującymi tematami:
+- treningiem prostych sieci neuronowych, w szczególności z:
+  - regresją liniową w sieciach neuronowych
+  - optymalizacją funkcji kosztu
+  - algorytmem spadku wzdłuż gradientu
+  - siecią typu Multilayer Perceptron (MLP)
+- frameworkiem PyTorch, w szczególności z:
+  - ładowaniem danych
+  - preprocessingiem danych
+  - pisaniem pętli treningowej i walidacyjnej
+  - walidacją modeli
+- architekturą i hiperaprametrami sieci MLP, w szczególności z:
+  - warstwami gęstymi (w pełni połączonymi)
+  - funkcjami aktywacji
+  - regularyzacją: L2, dropout
+
+
+  <h3> Wykorzystywane biblioteki</h3>
+
+Zaczniemy od pisania ręcznie prostych sieci w bibliotece Numpy, służącej do obliczeń numerycznych na CPU. Później przejdziemy do wykorzystywania frameworka PyTorch, służącego do obliczeń numerycznych na CPU, GPU oraz automatycznego różniczkowania, wykorzystywanego głównie do treningu sieci neuronowych.
+
+Wykorzystamy PyTorcha ze względu na popularność, łatwość instalacji i użycia, oraz dużą kontrolę nad niskopoziomowymi aspektami budowy i treningu sieci neuronowych. Framework ten został stworzony do zastosowań badawczych i naukowych, ale ze względu na wygodę użycia stał się bardzo popularny także w przemyśle. W szczególności całkowicie zdominował przetwarzanie języka naturalnego (NLP) oraz uczenie na grafach.
+
+Pierwszy duży framework do deep learningu, oraz obecnie najpopularniejszy, to TensorFlow, wraz z wysokopoziomową nakładką Keras. Są jednak szanse, że Google (autorzy) będzie go powoli porzucać na rzecz ich nowego frameworka JAX ([dyskusja](https://www.reddit.com/r/MachineLearning/comments/vfl57t/d_google_quietly_moving_its_products_from/), [artykuł Business Insidera](https://www.businessinsider.com/facebook-pytorch-beat-google-tensorflow-jax-meta-ai-2022-6?IR=T)), który jest bardzo świeżym, ale ciekawym narzędziem.
+
+Trzecia, ale znacznie mniej popularna od powyższych opcja to Apache MXNet.
+
+
+<h3> Wprowadzenie</h3>
+
+Zanim zaczniemy naszą przygodę z sieciami neuronowymi, przyjrzyjmy się prostemu przykładowi regresji liniowej 
+W przeciwieństwie do laboratorium 1, tym razem będziemy chcieli rozwiązać ten problem własnoręcznie, bez użycia wysokopoziomowego interfejsu Scikit-learn'a. W tym celu musimy sobie przypomnieć sformułowanie naszego <b>problemu optymalizacyjnego (optimization problem)</b>.
+
+W przypadku prostej regresji liniowej (1 zmienna) mamy model postaci $\hat{y} = \alpha x + \beta$, z dwoma parametrami, których będziemy się uczyć. Miarą niedopasowania modelu o danych parametrach jest <b>funkcja kosztu (cost function)</b>, nazywana też funkcją celu. Najczęściej używa się <b>błędu średniokwadratowego (mean squared error, MSE)</b>:
+$$MSE = \frac{1}{N} \sum_{i}^{N} (y - \hat{y})^2$$
+
+Od jakich $\alpha$ i $\beta$ zacząć? W najprostszym wypadku wystarczy po prostu je wylosować jako niewielkie liczby zmiennoprzecinkowe.
+
+
+
+
+
+Losowe parametry radzą sobie nie najlepiej. Jak lepiej dopasować naszą prostą do danych? Zawsze możemy starać się wyprowadzić rozwiązanie analitycznie, i w tym wypadku nawet nam się uda. Jest to jednak szczególny i dość rzadki przypadek, a w szczególności nie będzie to możliwe w większych sieciach neuronowych.
+
+Potrzebna nam będzie <b>metoda optymalizacji (optimization method)</b>, dającą wartości parametrów minimalizujące dowolną różniczkowalną funkcję kosztu. Zdecydowanie najpopularniejszy jest tutaj <b>spadek wzdłuż gradientu (gradient descent)</b>.
+
+Metoda ta wywodzi się z prostych obserwacji, które tutaj przedstawimy. Bardziej szczegółowe rozwinięcie dla zainteresowanych: [sekcja 4.3 "Deep Learning Book"](https://www.deeplearningbook.org/contents/numerical.html), [ten praktyczny kurs](https://cs231n.github.io/optimization-1/), [analiza oryginalnej publikacji Cauchy'ego](https://www.math.uni-bielefeld.de/documenta/vol-ismp/40_lemarechal-claude.pdf) (oryginał w języku francuskim).
+
+Pochodna jest dokładnie równa granicy funkcji. Dla małego $\epsilon$ można ją przybliżyć jako:
+$$\frac{f(x)}{dx} \approx \frac{f(x+\epsilon) - f(x)}{\epsilon}$$
+
+Przyglądając się temu równaniu widzimy, że: 
+* dla funkcji rosnącej ($f(x+\epsilon) > f(x)$) wyrażenie $\frac{f(x)}{dx}$ będzie miało znak dodatni 
+* dla funkcji malejącej ($f(x+\epsilon) < f(x)$) wyrażenie $\frac{f(x)}{dx}$ będzie miało znak ujemny 
+
+Widzimy więc, że potrafimy wskazać kierunek zmniejszenia wartości funkcji, patrząc na znak pochodnej. Zaobserwowano także, że amplituda wartości w $\frac{f(x)}{dx}$ jest tym większa, im dalej jesteśmy od minimum (maximum). Pochodna wyznacza więc, w jakim kierunku funkcja najszybciej rośnie, zaś przeciwny zwrot to ten, w którym funkcja najszybciej spada.
+
+Stosując powyższe do optymalizacji, mamy:
+$$x_{t+1} = x_{t} -  \alpha * \frac{f(x)}{dx}$$
+
+$\alpha$ to niewielka wartość (rzędu zwykle $10^{-5}$ - $10^{-2}$), wprowadzona, aby trzymać się założenia o małej zmianie parametrów ($\epsilon$). Nazywa się ją <b>stałą uczącą (learning rate)</b> i jest zwykle najważniejszym hiperparametrem podczas nauki sieci.
+
+Metoda ta zakłada, że używamy całego zbioru danych do aktualizacji parametrów w każdym kroku, co nazywa się po prostu GD (od *gradient descent*) albo *full batch GD*. Wtedy każdy krok optymalizacji nazywa się <b>epoką (epoch)</b>.
+
+Im większa stała ucząca, tym większe nasze kroki podczas minimalizacji. Możemy więc uczyć szybciej, ale istnieje ryzyko, że będziemy "przeskakiwać" minima. Mniejsza stała ucząca to wolniejszy, ale dokładniejszy trening. Jednak nie zawsze ona pozwala osiągnąć lepsze wyniki, bo może okazać się, że utkniemy w minimum lokalnym. Można także zmieniać stałą uczącą podczas treningu, co nazywa się <b>learning rate scheduling (LR scheduling)</b>. Obrazowo:
+
+
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/learning_rate.png" alt=""> 
+</div>
+
+<div style="  display: flex;justify-content: center;">
+    <img  src="assets/learning_rate_gif.gif" alt=""> 
+</div>
+
+
+
+Policzmy więc pochodną dla naszej funkcji kosztu MSE. Pochodną liczymy po parametrach naszego modelu, bo to właśnie ich chcemy dopasować tak, żeby koszt był jak najmniejszy:
+
+$$MSE = \frac{1}{N} \sum_{i}^{N} (y_i - \hat{y_i})^2$$
+
+W powyższym wzorze tylko $y_i$ jest zależny od $a$ oraz $b$. Możemy wykorzystać tu regułę łańcuchową (*chain rule*) i policzyć pochodne po naszych parametrach w sposób następujący:
+
+$$\frac{\text{d} MSE}{\text{d} a} = \frac{1}{N} \sum_{i}^{N} \frac{\text{d} (y_i - \hat{y_i})^2}{\text{d} \hat{y_i}} \frac{\text{d} \hat{y_i}}{\text{d} a}$$
+
+$$\frac{\text{d} MSE}{\text{d} b} = \frac{1}{N} \sum_{i}^{N} \frac{\text{d} (y_i - \hat{y_i})^2}{\text{d} \hat{y_i}} \frac{\text{d} \hat{y_i}}{\text{d} b}$$
+
+Policzmy te pochodne po kolei:
+
+$$\frac{\text{d} (y_i - \hat{y_i})^2}{\text{d} \hat{y_i}} = -2 \cdot (y_i - \hat{y_i})$$
+
+$$\frac{\text{d} \hat{y_i}}{\text{d} a} = x_i$$
+
+$$\frac{\text{d} \hat{y_i}}{\text{d} b} = 1$$
+
+Łącząc powyższe wyniki dostaniemy:
+
+$$\frac{\text{d} MSE}{\text{d} a} = \frac{-2}{N} \sum_{i}^{N} (y_i - \hat{y_i}) \cdot {x_i}$$
+
+$$\frac{\text{d} MSE}{\text{d} b} = \frac{-2}{N} \sum_{i}^{N} (y_i - \hat{y_i})$$
+
+Aktualizacja parametrów wygląda tak:
+
+$$a' = a - \alpha * \left( \frac{-2}{N} \sum_{i=1}^N (y_i - \hat{y}_i) \cdot x_i \right)$$
+$$b' = b - \alpha * \left( \frac{-2}{N} \sum_{i=1}^N (y_i - \hat{y}_i) \right)$$
+
+Liczymy więc pochodną funkcji kosztu, a potem za pomocą reguły łańcuchowej "cofamy się", dochodząc do tego, jak każdy z parametrów wpływa na błąd i w jaki sposób powinniśmy go zmienić. Nazywa się to <b>propagacją wsteczną (backpropagation)</b> i jest podstawowym mechanizmem umożliwiającym naukę sieci neuronowych za pomocą spadku wzdłuż gradientu. Więcej możesz o tym przeczytać [tutaj](https://cs231n.github.io/optimization-2/).
+
+
+
+</div>
+
+
+
+
+
+
+
+
+		</div>	
+	</div>
+
+</body>
+
+<script>
+    hide_all();
+</script>
+</html>
